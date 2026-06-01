@@ -1,22 +1,5 @@
-function login() {
-  const userEl = document.getElementById("username");
-  const passEl = document.getElementById("password");
-  const response = document.getElementById("loginResponse");
-
-  if (!userEl || !passEl) return;
-
-  const user = userEl.value;
-  const pass = passEl.value;
-
-  if(user === "iciu_agent" && pass === "directive72") {
-    window.location.href = "terminal.html";
-  } else {
-    if (response) response.innerHTML = "ACCESS DENIED";
-  }
-}
-
-// ===== SAFE INIT =====
 document.addEventListener("DOMContentLoaded", function () {
+  console.log("Day 1 loaded");
 
   const team = localStorage.getItem("teamName") || "UNKNOWN";
   const teamEl = document.getElementById("teamDisplay");
@@ -27,50 +10,85 @@ document.addEventListener("DOMContentLoaded", function () {
   let progress = {
     code1: false,
     code2: false,
-    code3: false
+    code3: false,
+    code4: false,
+    code5: false,
+    code6: false
   };
 
   function updateProgress() {
-    const el = document.getElementById("progress");
-    if (!el) return;
-
     const count = Object.values(progress).filter(v => v).length;
-    el.innerHTML = `Progress: ${count} / 3 Evidence Verified`;
+    const progressEl = document.getElementById("progress");
+    if (progressEl) {
+      progressEl.innerHTML = `Progress: ${count} / 6 Evidence Verified`;
+    }
   }
 
-  document.querySelector("button").addEventListener("click", function () {
+  function unlockModule(id, link, label) {
+    const el = document.getElementById(id);
+    if (!el) return;
 
-    const code = document.getElementById("codeInput").value.trim().toUpperCase();
+    el.classList.remove("locked");
+    el.innerHTML = `<a href="${link}" target="_blank">${label}</a>`;
+  }
+
+  window.checkCode = function () {
+    const inputEl = document.getElementById("codeInput");
     const response = document.getElementById("response");
 
-    if(code === "0412") {
-      response.innerHTML = "✔ Calendar Unlocked";
-      document.getElementById("mod2").innerHTML =
-        `<a href="https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgD1SblGIzxNQ6TZ1Foftn-cAcBh_9Al9knRBjzr4f9mEYg?e=rMkUvk" target="_blank">[2] Calendar System</a>`;
-    }
+    if (!inputEl || !response) return;
 
-    else if(code === "19:00") {
-      response.innerHTML = "✔ Finance Unlocked";
-      document.getElementById("mod3").innerHTML =
-        `<a href="https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgDgTUmNrPITSrHUUBdY9iJSAQYPRUNoMTiKlcXH1S1AHBs?e=ibavv5" target="_blank">[3] Financial Records</a>`;
-    }
+    const code = inputEl.value.trim().toUpperCase();
 
-    else if(code === "ACCT-7781") {
-      response.innerHTML = "✔ HR Unlocked";
-      document.getElementById("mod4").innerHTML =
-        `<a href="https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgDJIhaZCRjAQJWyCGulDOH9Aa3V19mCeqF7ehQZgKj4VDI?e=28teRV" target="_blank">[4] HR Database</a>`;
+    if (code === "0800" && !progress.code1) {
+      progress.code1 = true;
+      response.innerHTML = "✔ Admission Time Verified → Nursing Notes Unlocked";
+      unlockModule("mod2", "YOUR-NURSING-NOTES-LINK", "[2] Nursing Notes");
     }
-
-    else if(code === "SILENTDIRECTIVE") {
-      window.location.href = "puzzles/day1_end.html";
+    else if (code === "WEAKNESS" && !progress.code2) {
+      progress.code2 = true;
+      response.innerHTML = "✔ Symptom Pattern Verified → Vital Signs Unlocked";
+      unlockModule("mod3", "YOUR-VITAL-SIGNS-LINK", "[3] Vital Signs");
     }
-
+    else if (code === "DROP" && !progress.code3) {
+      progress.code3 = true;
+      response.innerHTML = "✔ Trend Verified → Room Assignment Unlocked";
+      unlockModule("mod4", "YOUR-ROOM-ASSIGNMENT-LINK", "[4] Room Assignment");
+    }
+    else if (code === "314" && !progress.code4) {
+      progress.code4 = true;
+      response.innerHTML = "✔ Room Verified → Admission Record Unlocked";
+      unlockModule("mod5", "YOUR-ADMISSION-RECORD-LINK", "[5] Admission Record");
+    }
+    else if (code === "CARDIAC" && !progress.code5) {
+      progress.code5 = true;
+      response.innerHTML = "✔ Diagnosis Verified → Incident Timeline Unlocked";
+      unlockModule("mod6", "YOUR-INCIDENT-TIMELINE-LINK", "[6] Incident Timeline");
+    }
+    else if (code === "1047") {
+      if (
+        progress.code1 &&
+        progress.code2 &&
+        progress.code3 &&
+        progress.code4 &&
+        progress.code5 &&
+        progress.code6
+      ) {
+        response.innerHTML = "⚠ CODE BLUE CONFIRMED...";
+        setTimeout(() => {
+          window.location.href = "puzzles/day1_end.html";
+        }, 1500);
+      } else {
+        response.innerHTML = "✖ INCOMPLETE DATA. MORE EVIDENCE REQUIRED.";
+      }
+    }
     else {
-      response.innerHTML = "✖ INVALID CODE";
+      response.innerHTML = "✖ INVALID OR ALREADY USED CODE";
     }
 
-    document.getElementById("codeInput").value = "";
+    inputEl.value = "";
     updateProgress();
-  });
+  };
 
+  updateProgress();
 });
