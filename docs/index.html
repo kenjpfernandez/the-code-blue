@@ -2,16 +2,20 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Code Blue — Entry</title>
+  <title>Code Blue — Entry Point</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
 <div class="terminal">
   <h1>HOSPITAL INCIDENT ACCESS</h1>
+
   <div id="boot"></div>
 
   <div id="inputSection" style="display:none;">
+    <p>> Case ID: CB-314</p>
+    <p>> Incident review in progress</p>
+    <p>> Code Blue event recorded at 10:47</p>
     <p>> Enter team designation:</p>
     <input type="text" id="teamInput" placeholder="Team name">
 
@@ -27,8 +31,11 @@
 <script>
 const lines = [
   "> Connecting to hospital incident system...",
-  "> Loading patient review module...",
-  "> Verifying team access...",
+  "> Loading patient safety review module...",
+  "> Case ID loaded: CB-314",
+  "> Critical event recorded: 10:47",
+  "> Room assignment pending verification...",
+  "> Preparing secure access...",
   "> System ready."
 ];
 
