@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Code Blue Terminal — Day 1</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="terminal">
+
+  <h1>CODE BLUE — DAY 1</h1>
+  <p>Status: <span class="status">UNDER REVIEW</span></p>
+
+  <p id="teamDisplay"></p>
+  <p id="progress">Progress: 0 / 6 Evidence Verified</p>
+
+  <hr>
+
+  <h2>EVIDENCE MODULES</h2>
+  <ul>
+    <li><a href="YOUR-PATIENT-CHART-LINK" target="_blank">[1] Patient Chart</a></li>
+    <li id="mod2" class="locked">[2] Nursing Notes 🔒</li>
+    <li id="mod3" class="locked">[3] Vital Signs 🔒</li>
+    <li id="mod4" class="locked">[4] Room Assignment 🔒</li>
+    <li id="mod5" class="locked">[5] Admission Record 🔒</li>
+    <li id="mod6" class="locked">[6] Incident Timeline 🔒</li>
+  </ul>
+
+  <hr>
+
+  <h2>ENTER EVIDENCE CODE</h2>
+  <input type="text" id="codeInput" placeholder="Enter code">
+  <button type="button" onclick="checkCode()">SUBMIT</button>
+
+  <p id="response"></p>
+
+</div>
+
+<script src="script_day1.js"></script>
+
+</body>
+</html>
