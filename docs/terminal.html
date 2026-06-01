@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ICIU Terminal</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="terminal">
+
+  <h1>ICIU INVESTIGATION TERMINAL</h1>
+  <p>Status: <span class="status">BOARD OFFLINE</span></p>
+
+  <p id="teamDisplay"></p>
+  <p id="progress">Progress: 0 / 3 Evidence Verified</p>
+
+  <hr>
+
+  <h2>MODULES</h2>
+  <ul>
+    <li>
+      <a href="https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgDul-KaeMtoR7XNuoaOUoTBATqUcOdVruuvDyhahRoPSMc?e=hQ8lco" target="_blank">
+        [1] Email Archive
+      </a>
+    </li>
+
+    <li id="mod2" class="locked">[2] Calendar System 🔒</li>
+    <li id="mod3" class="locked">[3] Financial Records 🔒</li>
+    <li id="mod4" class="locked">[4] HR Database 🔒</li>
+  </ul>
+
+  <hr>
+
+  <h2>ENTER ACCESS CODE</h2>
+
+  <input type="text" id="codeInput" placeholder="Enter code">
+  <button>SUBMIT</button>
+
+  <p id="response"></p>
+
+</div>
+
+<script src="script_day1.js"></script>
+
+</body>
+</html>

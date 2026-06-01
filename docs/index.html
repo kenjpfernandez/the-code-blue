@@ -1,0 +1,161 @@
+<h1>Vanishing Board Terminal</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ICIU Entry Point</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body.glitch { animation: glitch 0.2s infinite; }
+    @keyframes glitch {
+      0% { transform: translate(0,0); }
+      25% { transform: translate(2px,-2px); }
+      50% { transform: translate(-2px,2px); }
+      75% { transform: translate(2px,2px); }
+      100% { transform: translate(0,0); }
+    }
+    .alert { color:#ff3b3b; }
+  </style>
+</head>
+<body>
+
+<div class="terminal">
+  <h1 id="title"></h1>
+  <div id="boot"></div>
+  <br>
+
+  <div id="commandSection" style="display:none;">
+    <p id="teamMsg"></p>
+    <p>> Enter command to proceed:</p>
+    <input type="text" id="commandInput" placeholder="TYPE COMMAND" autofocus>
+    <button onclick="runCommand()">EXECUTE</button>
+    <p id="commandResponse"></p>
+  </div>
+</div>
+
+<script>
+// ===== TEAM PERSONALIZATION =====
+const params = new URLSearchParams(window.location.search);
+let team = params.get("team");
+
+if(!team) {
+  team = localStorage.getItem("teamName") || prompt("Enter your Team Name:");
+  localStorage.setItem("teamName", team);
+}
+
+function showTeamMessage() {
+  const msg = document.getElementById("teamMsg");
+  msg.innerHTML = `> Welcome, Team ${team}. Your activity is being monitored.`;
+}
+
+// ===== BOOT SEQUENCE =====
+const bootLines = [
+  "> Booting ICIU Secure Interface...",
+  "> Establishing encrypted channel...",
+  "> Verifying system integrity...",
+  "> Loading executive activity logs...",
+  "> WARNING: Board status = OFFLINE",
+  "> Anomaly detected in last 72 hours",
+  "> Trace INITIATE-d...",
+  "> Error: ACCESS logs partially corrupted",
+  "> Restoring minimal interface...",
+  "> Hint: Initialization protocol keyword detected...",
+  "> Fragment recovered: SD-INIT",
+  "> System ready",
+  "> Retrieving credential hint...",
+  "> Username Fragment: ICIU_AGENT",
+  "> Password Fragment: directive__",
+  "> Note: Replace blanks with NUMBER of missing board members"
+];
+
+let i = 0;
+const bootDiv = document.getElementById("boot");
+const title = document.getElementById("title");
+
+function typeLine(text, callback) {
+  let index = 0;
+  const line = document.createElement("p");
+  bootDiv.appendChild(line);
+
+  const interval = setInterval(() => {
+    line.textContent = text.slice(0, index++);
+    if(index > text.length) {
+      clearInterval(interval);
+      setTimeout(callback, 300);
+    }
+  }, 20);
+}
+
+function runBoot() {
+  if(i < bootLines.length) {
+    typeLine(bootLines[i], () => { i++; runBoot(); });
+  } else {
+    document.getElementById("commandSection").style.display = "block";
+    showTeamMessage();
+    scheduleIntrusion();
+  }
+}
+
+// ===== LIVE INTRUSION EVENT =====
+function scheduleIntrusion() {
+  setTimeout(() => {
+    triggerIntrusion();
+  }, 8000 + Math.random()*5000); // random timing
+}
+
+function triggerIntrusion() {
+  document.body.classList.add("glitch");
+
+  const alert = document.createElement("p");
+  alert.className = "alert";
+  alert.innerHTML = `> ⚠ INTRUSION DETECTED...\n> External entity accessing logs\n> Target: Team ${team}`;
+  bootDiv.appendChild(alert);
+
+  setTimeout(() => {
+    document.body.classList.remove("glitch");
+
+    const followUp = document.createElement("p");
+    followUp.innerHTML = `> Trace failed. Entity masked.`;
+    bootDiv.appendChild(followUp);
+
+  }, 1500);
+}
+
+// ===== COMMAND SYSTEM =====
+function runCommand() {
+  const input = document.getElementById("commandInput").value.trim().toUpperCase();
+  const response = document.getElementById("commandResponse");
+
+  if(input === "INITIATE" || input === "ACCESS") {
+    response.innerHTML = "> ACCESS GRANTED... Redirecting...";
+    setTimeout(() => { window.location.href = "login.html"; }, 1500);
+
+  } else if(input === "SD-INIT") {
+    document.body.classList.add("glitch");
+    response.innerHTML = `> OVERRIDE DETECTED...\n> Welcome, Team ${team}...`;
+    setTimeout(() => { window.location.href = "terminal.html"; }, 2000);
+
+  } else if(input === "HELP") {
+    response.innerHTML = "> Available commands: INITIATE, ACCESS";
+
+  } else {
+    response.innerHTML = "> INVALID COMMAND";
+  }
+}
+
+// ===== TITLE =====
+let t = "ICIU SECURE TERMINAL";
+let ti = 0;
+function typeTitle() {
+  title.textContent = t.slice(0, ti++);
+  if(ti <= t.length) setTimeout(typeTitle, 50);
+}
+
+window.onload = () => {
+  typeTitle();
+  setTimeout(runBoot, 800);
+};
+</script>
+
+</body>
+</html>

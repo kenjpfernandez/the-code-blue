@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>System Termination</title>
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    .glitch {
+      animation: glitch 0.2s infinite;
+    }
+
+```
+@keyframes glitch {
+  0% { transform: translate(0,0); }
+  25% { transform: translate(2px,-2px); }
+  50% { transform: translate(-2px,2px); }
+  75% { transform: translate(2px,2px); }
+  100% { transform: translate(0,0); }
+}
+
+.fade {
+  opacity: 0;
+  transition: opacity 2s ease;
+}
+
+.visible {
+  opacity: 1;
+}
+```
+
+  </style>
+</head>
+<body>
+
+<div class="terminal">
+
+  <h1>SYSTEM TERMINATION</h1>
+  <div id="content"></div>
+
+</div>
+
+<script>
+
+const lines = [
+  "> Finalizing session...",
+  "> Logging investigator activity...",
+  "",
+  "> Cross-referencing conclusions...",
+  "",
+  "> No single truth identified.",
+  "> Multiple valid interpretations recorded.",
+  "",
+  "> This system does not determine reality.",
+  "> It reflects perspective.",
+  "",
+  "> Your conclusion has been archived.",
+];
+
+let i = 0;
+const contentDiv = document.getElementById("content");
+
+function typeLine() {
+  if(i < lines.length) {
+    const p = document.createElement("p");
+    contentDiv.appendChild(p);
+
+    let text = lines[i];
+    let j = 0;
+
+    const interval = setInterval(() => {
+      p.textContent = text.slice(0, j++);
+      if(j > text.length) {
+        clearInterval(interval);
+        i++;
+        setTimeout(typeLine, 400);
+      }
+    }, 20);
+
+  } else {
+    finalSequence();
+  }
+}
+
+function finalSequence() {
+
+  setTimeout(() => {
+    const final = document.createElement("p");
+    final.className = "glitch";
+    final.innerHTML = "<br>> Your session has been logged.";
+    contentDiv.appendChild(final);
+  }, 1000);
+
+  setTimeout(() => {
+    const end = document.createElement("p");
+    end.innerHTML = "> System shutting down...";
+    contentDiv.appendChild(end);
+  }, 2500);
+
+  setTimeout(() => {
+    document.body.innerHTML = `
+      <div class="terminal fade" id="endScreen">
+        <h1>SESSION COMPLETE</h1>
+        <p>Thank you for participating.</p>
+      </div>
+    `;
+
+    setTimeout(() => {
+      document.getElementById("endScreen").classList.add("visible");
+    }, 100);
+
+  }, 4000);
+}
+
+window.onload = () => {
+  setTimeout(typeLine, 800);
+};
+
+</script>
+
+</body>
+</html>

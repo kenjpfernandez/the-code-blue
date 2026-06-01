@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ICIU Secure Login</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="terminal">
+
+  <h1>SECURE ACCESS PORTAL</h1>
+  <p id="teamDisplay"></p>
+
+  <p>> Authentication Required</p>
+
+  <br>
+
+  <input type="text" id="username" placeholder="Username"><br><br>
+  <input type="password" id="password" placeholder="Password"><br><br>
+
+  <button onclick="login()">LOGIN</button>
+
+  <p id="loginResponse"></p>
+
+</div>
+
+<script>
+
+// Get team name from localStorage
+const team = localStorage.getItem("teamName") || "UNKNOWN";
+document.getElementById("teamDisplay").innerHTML = `> Team Identified: ${team}`;
+
+// LOGIN LOGIC
+function login() {
+  const user = document.getElementById("username").value.trim().toUpperCase();
+  const pass = document.getElementById("password").value.trim().toLowerCase();
+  const response = document.getElementById("loginResponse");
+
+  // Correct credentials
+  if(user === "ICIU_AGENT" && pass === "directive72") {
+    response.innerHTML = "> ACCESS GRANTED... Redirecting...";
+    
+    setTimeout(() => {
+      window.location.href = "terminal.html";
+    }, 1500);
+
+  } else {
+    response.innerHTML = "> ACCESS DENIED";
+
+    // Add tension: slight delay + warning
+    setTimeout(() => {
+      response.innerHTML += "<br>> Warning: Multiple failed attempts will be logged.";
+    }, 1000);
+  }
+}
+
+  let attempts = 0;
+
+function login() {
+  attempts++;
+
+  const user = document.getElementById("username").value.trim().toUpperCase();
+  const pass = document.getElementById("password").value.trim().toLowerCase();
+  const response = document.getElementById("loginResponse");
+
+  if(user === "ICIU_AGENT" && pass === "directive72") {
+    response.innerHTML = "> ACCESS GRANTED... Redirecting...";
+    setTimeout(() => {
+      window.location.href = "terminal.html";
+    }, 1500);
+
+  } else {
+    response.innerHTML = "> ACCESS DENIED";
+
+    if(attempts >= 2) {
+      setTimeout(() => {
+        response.innerHTML += "<br>> Hint: Check system logs for credential fragments.";
+      }, 1000);
+    }
+  }
+}
+
+</script>
+
+</body>
+</html>
