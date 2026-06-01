@@ -8,38 +8,55 @@
 <body>
 
 <div class="terminal">
+
   <h1>SECURE HOSPITAL ACCESS</h1>
 
   <p id="teamDisplay"></p>
-  <p>> Authentication required</p>
+  <p class="muted">> Rapid Incident Review authentication required</p>
+  <p class="muted">> Case ID: CB-314</p>
+  <p class="muted">> Event: Code Blue recorded at 10:47</p>
+  <p class="muted">> Scope: Timeline, vitals, medication, escalation records</p>
 
-  <input type="text" id="username" placeholder="Username"><br><br>
-  <input type="password" id="password" placeholder="Password"><br><br>
+  <hr>
+
+  <div class="summary-box">
+    <p>> Temporary credentials issued for review committee only</p>
+    <p>> Clearance level: Clinical Audit</p>
+    <p>> Access is being monitored</p>
+  </div>
+
+  <hr>
+
+  <p>> Enter credentials to continue</p>
+
+  <input type="text" id="username" placeholder="Username">
+  <input type="password" id="password" placeholder="Password">
 
   <button type="button" onclick="login()">LOGIN</button>
 
   <p id="loginResponse"></p>
+
 </div>
 
 <script>
-const team = localStorage.getItem("teamName") || "UNKNOWN";
-document.getElementById("teamDisplay").innerHTML = `> Team: ${team}`;
+  const team = localStorage.getItem("teamName") || "UNKNOWN";
+  document.getElementById("teamDisplay").innerHTML = `> Team: ${team}`;
 
-function login() {
-  const user = document.getElementById("username").value.trim().toLowerCase();
-  const pass = document.getElementById("password").value.trim().toLowerCase();
-  const response = document.getElementById("loginResponse");
+  function login() {
+    const user = document.getElementById("username").value.trim().toLowerCase();
+    const pass = document.getElementById("password").value.trim().toLowerCase();
+    const response = document.getElementById("loginResponse");
 
-  if (user === "codeblue" && pass === "review314") {
-    localStorage.setItem("day1Complete", "false");
-    response.innerHTML = "> ACCESS GRANTED...";
-    setTimeout(() => {
-      window.location.href = "terminal_day1.html";
-    }, 1200);
-  } else {
-    response.innerHTML = "> ACCESS DENIED";
+    // You can change these credentials anytime
+    if (user === "codeblue" && pass === "review314") {
+      response.innerHTML = "> ACCESS GRANTED...";
+      setTimeout(() => {
+        window.location.href = "terminal_day1.html";
+      }, 1200);
+    } else {
+      response.innerHTML = "> ACCESS DENIED";
+    }
   }
-}
 </script>
 
 </body>
