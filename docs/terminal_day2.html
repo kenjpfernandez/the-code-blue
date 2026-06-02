@@ -2,48 +2,40 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>ICIU Terminal — Day 2</title>
+  <title>Code Blue Terminal — Day 2</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
 <div class="terminal">
 
-  <h1>ICIU TERMINAL — DATA INTEGRITY WARNING</h1>
-  <p>Status: <span class="status">COMPROMISED</span></p>
-
-  <p style="color:red;">> WARNING: System logs have been altered.</p>
+  <h1>CODE BLUE — DAY 2</h1>
+  <p>Status: <span class="status">MEDICATION REVIEW</span></p>
 
   <p id="teamDisplay"></p>
-  <p id="progress">Progress: 0 / 3 Evidence Verified</p>
+  <p id="progress">Progress: 0 / 5 Evidence Verified</p>
 
   <hr>
 
-  <h2>MODULES</h2>
+  <h2>EVIDENCE MODULES</h2>
   <ul>
-    <li>
-      <a href="https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgDcn2uZdPmwRJZzfYZWHo9CAaN6-Yu3UunFUa79oYt17yg?e=DWgqPk" target="_blank">
-        [1] Email Archive (Revised)
-      </a>
-    </li>
-
-    <li id="mod2" class="locked">[2] Calendar System 🔒</li>
-    <li id="mod3" class="locked">[3] Financial Records 🔒</li>
-    <li id="mod4" class="locked">[4] HR Database 🔒</li>
+    <li><a href="YOUR-MEDICATION-RECORD-LINK" target="_blank">[1] Medication Records</a></li>
+    <li id="mod2" class="locked">[2] Pharmacy Logs 🔒</li>
+    <li id="mod3" class="locked">[3] Physician Orders 🔒</li>
+    <li id="mod4" class="locked">[4] Lab Results 🔒</li>
+    <li id="mod5" class="locked">[5] Dispensing History 🔒</li>
   </ul>
 
   <hr>
 
-  <h2>ENTER ACCESS CODE</h2>
-
+  <h2>ENTER EVIDENCE CODE</h2>
   <input type="text" id="codeInput" placeholder="Enter code">
-  <button>SUBMIT</button>
+  <button type="button" onclick="checkCode()">SUBMIT</button>
 
   <p id="response"></p>
 
 </div>
 
-<!-- IMPORTANT: only ONE script -->
 <script src="script_day2.js"></script>
 
 </body>
