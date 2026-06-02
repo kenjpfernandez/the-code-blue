@@ -1,68 +1,102 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-  console.log("Day 2 loaded");
-
-  // ===== NORMAL GAME =====
+  console.log("Code Blue Day 2 Loaded");
 
   const team = localStorage.getItem("teamName") || "UNKNOWN";
-  document.getElementById("teamDisplay").innerHTML = `> Team: ${team}`;
+  const teamEl = document.getElementById("teamDisplay");
+
+  if (teamEl) {
+    teamEl.innerHTML = `> Team: ${team}`;
+  }
 
   let progress = {
     code1: false,
     code2: false,
-    code3: false
+    code3: false,
+    code4: false,
+    code5: false
   };
 
   function updateProgress() {
     const count = Object.values(progress).filter(v => v).length;
-    document.getElementById("progress").innerHTML =
-      `Progress: ${count} / 3 Evidence Verified`;
+    const progressEl = document.getElementById("progress");
+
+    if (progressEl) {
+      progressEl.innerHTML = `Progress: ${count} / 5 Evidence Verified`;
+    }
   }
 
-  document.querySelector("button").addEventListener("click", function () {
+  function unlockModule(id, link, label) {
+    const el = document.getElementById(id);
+    if (!el) return;
 
-    const code = document.getElementById("codeInput").value.trim().toUpperCase();
+    el.classList.remove("locked");
+    el.innerHTML = `<a href="${link}" target="_blank">${label}</a>`;
+  }
+
+  window.checkCode = function () {
+    const inputEl = document.getElementById("codeInput");
     const response = document.getElementById("response");
 
-    if(code === "0315") {
+    if (!inputEl || !response) return;
+
+    const code = inputEl.value.trim().toUpperCase();
+
+    console.log("INPUT:", code);
+
+    if (code === "MED-A12" && !progress.code1) {
       progress.code1 = true;
-      response.innerHTML = "✔ Calendar Unlocked";
-      document.getElementById("mod2").innerHTML =
-        `<a href="https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgDQ1U8qkmbyQZxzf2eDxqYuAT6XdExumNP13Vs0uRa25rs?e=6KQXkV" target="_blank">[2] Calendar</a>`;
+      response.innerHTML = "✔ Medication Verified → Pharmacy Logs Unlocked";
+      unlockModule("mod2", "YOUR-PHARMACY-LOG-LINK", "[2] Pharmacy Logs");
     }
 
-    else if(code === "18:45") {
+    else if (code === "OVERRIDE" && !progress.code2) {
       progress.code2 = true;
-      response.innerHTML = "✔ Finance Unlocked";
-      document.getElementById("mod3").innerHTML =
-        `<a href="https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgDic3qH6l9pQLqSJjVKAcNYAa8JzqpRAYK2Xyygo0pyHyw?e=GUKTb3" target="_blank">[3] Finance</a>`;
+      response.innerHTML = "✔ Override Confirmed → Physician Orders Unlocked";
+      unlockModule("mod3", "YOUR-PHYSICIAN-ORDERS-LINK", "[3] Physician Orders");
     }
 
-    else if(code === "ACCT-9913") {
+    else if (code === "INTERACTION" && !progress.code3) {
       progress.code3 = true;
-      response.innerHTML = "✔ HR Unlocked";
-      document.getElementById("mod4").innerHTML =
-        `<a href="https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgCeSvYrR43bQ7svjnIitYKAAd45Hwl_mbLJQyAHwriqWYY?e=YYVySp" target="_blank">[4] HR</a>`;
+      response.innerHTML = "✔ Interaction Flagged → Lab Results Unlocked";
+      unlockModule("mod4", "YOUR-LAB-RESULTS-LINK", "[4] Lab Results");
     }
 
-    else if(code === "TRUSTNOTHING") {
+    else if (code === "POTASSIUM" && !progress.code4) {
+      progress.code4 = true;
+      response.innerHTML = "✔ Critical Lab Value Verified → Dispensing History Unlocked";
+      unlockModule("mod5", "YOUR-DISPENSING-HISTORY-LINK", "[5] Dispensing History");
+    }
 
-      if(progress.code1 && progress.code2 && progress.code3) {
-        response.innerHTML = "⚠ SYSTEM OVERRIDE...";
+    else if (code === "TIMING" && !progress.code5) {
+      progress.code5 = true;
+      response.innerHTML = "✔ Timeline Verified → Final Root Cause Available";
+    }
+
+    else if (code === "MEDICATION INTERACTION") {
+      if (
+        progress.code1 &&
+        progress.code2 &&
+        progress.code3 &&
+        progress.code4 &&
+        progress.code5
+      ) {
+        response.innerHTML = "⚠ ROOT CAUSE CONFIRMED...";
         setTimeout(() => {
           window.location.href = "puzzles/day2_end.html";
         }, 1500);
       } else {
-        response.innerHTML = "✖ INCOMPLETE DATA";
+        response.innerHTML = "✖ INCOMPLETE DATA. MORE EVIDENCE REQUIRED.";
       }
     }
 
     else {
-      response.innerHTML = "✖ INVALID CODE";
+      response.innerHTML = "✖ INVALID OR ALREADY USED CODE";
     }
 
-    document.getElementById("codeInput").value = "";
+    inputEl.value = "";
     updateProgress();
-  });
+  };
 
+  updateProgress();
 });
