@@ -1,56 +1,42 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>ICIU Terminal — Final Phase</title>
+  <title>Code Blue Terminal — Day 3</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
 <div class="terminal">
 
-  <h1>ICIU TERMINAL — FINAL AUTHORIZATION</h1>
-  <p>Status: <span class="status">CRITICAL</span></p>
-
-  <p style="color:red;">> WARNING: Final decision required.</p>
-
-  <!-- TEAM DISPLAY -->
+  <h1>CODE BLUE — DAY 3</h1>
+  <p>Status: <span class="status">ROOT CAUSE REVIEW</span></p>
 
   <p id="teamDisplay"></p>
+  <p id="progress">Progress: 0 / 4 Evidence Verified</p>
 
   <hr>
 
-  <!-- 🔥 NEW: DATA ACCESS SECTION -->
-
-  <h2>FINAL DATA SET</h2>
-
-  <p>> All available records have been unlocked.</p>
-  <p>> Review carefully before submitting your conclusion.</p>
-
+  <h2>EVIDENCE MODULES</h2>
   <ul>
     <li>
-      <a href="https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgAnDWSB2P6WT6bEgLUSmbgbAW4luZOg59bMIiUfVK71OgE?e=5j97YP" target="_blank">
-        [1] EXECUTIVE DIRECTOR DATASET
-      </a>
+      <a href="YOUR-SHIFT-HANDOVER-LINK" target="_blank">[1] Shift Handover</a>
     </li>
+    <li id="mod2" class="locked">[2] Alert Logs 🔒</li>
+    <li id="mod3" class="locked">[3] Escalation Records 🔒</li>
+    <li id="mod4" class="locked">[4] Review Committee 🔒</li>
+    <li id="mod5" class="locked">[5] Final Summary 🔒</li>
   </ul>
 
   <hr>
 
-  <!-- FINAL INPUT -->
-
-  <h2>ENTER FINAL CONCLUSION</h2>
-
-  <input type="text" id="codeInput" placeholder="Enter conclusion">
-
-<button>SUBMIT</button>
+  <h2>ENTER ROOT CAUSE CLASSIFICATION</h2>
+  <input type="text" id="codeInput" placeholder="Enter code">
+  <button type="button" onclick="checkCode()">SUBMIT</button>
 
   <p id="response"></p>
 
 </div>
-
-<!-- IMPORTANT: Only load ONE script -->
 
 <script src="script_day3.js"></script>
 
