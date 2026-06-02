@@ -1,1 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Code Blue — Final Review Complete</title>
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    .glitch {
+      animation: glitch 0.2s infinite;
+    }
 
+    @keyframes glitch {
+      0% { transform: translate(0,0); }
+      25% { transform: translate(2px,-2px); }
+      50% { transform: translate(-2px,2px); }
+      75% { transform: translate(2px,2px); }
+      100% { transform: translate(0,0); }
+    }
+
+    .warning {
+      color: #ff6b6b;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="terminal">
+  <h1>FINAL REVIEW COMPLETE</h1>
+  <p>> Processing root cause analysis...</p>
+
+  <div id="content"></div>
+</div>
+
+<script>
+const lines = [
+  "> Shift handover reviewed.",
+  "> Alert logs verified.",
+  "> Escalation records confirmed.",
+  "> Review committee notes processed.",
+  "",
+  "> Early warning signs were documented.",
+  "> Warning signals were not escalated in time.",
+  "",
+  "> Root cause classification complete.",
+  "",
+  "> Event deemed preventable.",
+  "> Patient status: Stable",
+  "",
+  "> CASE ARCHIVED"
+];
+
+let i = 0;
+const contentDiv = document.getElementById("content");
+
+function typeLine() {
+  if (i < lines.length) {
+    const p = document.createElement("p");
+    contentDiv.appendChild(p);
+
+    let text = lines[i];
+    let j = 0;
+
+    const interval = setInterval(() => {
+      p.textContent = text.slice(0, j++);
+      if (j > text.length) {
+        clearInterval(interval);
+        i++;
+        setTimeout(typeLine, 350);
+      }
+    }, 20);
+  } else {
+    triggerFinal();
+  }
+}
+
+function triggerFinal() {
+  document.body.classList.add("glitch");
+
+  const finalMsg = document.createElement("p");
+  finalMsg.className = "warning";
+  finalMsg.innerHTML = "> EARLY WARNING MISSED<br>> ROOT CAUSE CONFIRMED";
+  contentDiv.appendChild(finalMsg);
+
+  setTimeout(() => {
+    const endMsg = document.createElement("p");
+    endMsg.innerHTML = "<br>> Session complete.";
+    contentDiv.appendChild(endMsg);
+  }, 1500);
+}
+
+window.onload = () => {
+  setTimeout(typeLine, 700);
+};
+</script>
+
+</body>
+</html>
