@@ -1,78 +1,66 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Data Breach Detected</title>
+  <title>Code Blue — Day 2 Complete</title>
   <link rel="stylesheet" href="../styles.css">
   <style>
     .glitch {
       animation: glitch 0.2s infinite;
     }
 
-```
-@keyframes glitch {
-  0% { transform: translate(0,0); }
-  25% { transform: translate(2px,-2px); }
-  50% { transform: translate(-2px,2px); }
-  75% { transform: translate(2px,2px); }
-  100% { transform: translate(0,0); }
-}
+    @keyframes glitch {
+      0% { transform: translate(0,0); }
+      25% { transform: translate(2px,-2px); }
+      50% { transform: translate(-2px,2px); }
+      75% { transform: translate(2px,2px); }
+      100% { transform: translate(0,0); }
+    }
 
-.warning {
-  color: red;
-  margin-top: 20px;
-}
+    .warning {
+      color: #ff6b6b;
+      margin-top: 20px;
+    }
 
-.next-link {
-  display: block;
-  margin-top: 30px;
-  color: #00ff9f;
-  text-decoration: none;
-  font-weight: bold;
-}
-```
-
+    .next-link {
+      display: block;
+      margin-top: 30px;
+      color: #00ff9f;
+      text-decoration: none;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
 
 <div class="terminal">
-
-  <h1>DATA VALIDATION COMPLETE</h1>
-  <p>> Processing recovered data...</p>
+  <h1>ROOT CAUSE REVIEW</h1>
+  <p>> Processing medication review...</p>
 
   <div id="content"></div>
   <div id="nextPhase"></div>
-
 </div>
 
 <script>
-
-// ===== TYPEWRITER LINES =====
 const lines = [
-  "> Cross-referencing complete...",
-  "> Integrity check failed.",
+  "> Pharmacy records reviewed.",
+  "> Physician orders cross-checked.",
+  "> Lab results confirmed critical values.",
   "",
-  "> WARNING: DATA HAS BEEN ALTERED",
+  "> Medication interaction identified.",
+  "> Event classified as preventable.",
   "",
-  "> Previous conclusions are no longer reliable.",
-  "> You were working with manipulated information.",
+  "> No equipment failure detected.",
+  "> No malicious action detected.",
   "",
-  "> The board did not disappear.",
-  "> They initiated the event.",
-  "",
-  "> Authorization records remain inconsistent.",
-  "",
-  "> One question remains:"
+  "> INCIDENT FILE SEALED"
 ];
 
 let i = 0;
 const contentDiv = document.getElementById("content");
 
-// ===== TYPEWRITER EFFECT =====
 function typeLine() {
-  if(i < lines.length) {
+  if (i < lines.length) {
     const p = document.createElement("p");
     contentDiv.appendChild(p);
 
@@ -81,51 +69,49 @@ function typeLine() {
 
     const interval = setInterval(() => {
       p.textContent = text.slice(0, j++);
-      if(j > text.length) {
+      if (j > text.length) {
         clearInterval(interval);
         i++;
-        setTimeout(typeLine, 400);
+        setTimeout(typeLine, 350);
       }
     }, 20);
-
   } else {
     triggerFinal();
   }
 }
 
-// ===== FINAL SEQUENCE =====
 function triggerFinal() {
-
   document.body.classList.add("glitch");
 
-  const finalQ = document.createElement("p");
-  finalQ.className = "warning";
-  finalQ.innerHTML = "<br>> WHO APPROVED THE DIRECTIVE?";
-  contentDiv.appendChild(finalQ);
+  const warning = document.createElement("p");
+  warning.className = "warning";
+  warning.innerHTML = "> REVIEW TRANSITIONED TO PHASE 3";
+  contentDiv.appendChild(warning);
 
   setTimeout(() => {
-    showNextPhase();
-  }, 2000);
+    const finalMsg = document.createElement("p");
+    finalMsg.innerHTML = "<br>> You were not supposed to close the file this early.";
+    contentDiv.appendChild(finalMsg);
+
+    localStorage.setItem("day2Complete", "true");
+
+    setTimeout(showNextPhase, 1500);
+  }, 1500);
 }
 
-// ===== NEXT PHASE (LOCK + LINK) =====
 function showNextPhase() {
-
-  // mark Day 2 complete
-  localStorage.setItem("day2Complete", "true");
-
   const container = document.getElementById("nextPhase");
 
   const p1 = document.createElement("p");
-  p1.innerHTML = "> Final phase available.";
+  p1.innerHTML = "> New directive available.";
 
   const p2 = document.createElement("p");
-  p2.innerHTML = "> Awaiting investigator authorization...";
+  p2.innerHTML = "> Awaiting investigator input...";
 
   const link = document.createElement("a");
   link.href = "../terminal_day3.html";
   link.className = "next-link";
-  link.innerHTML = "> INITIATE FINAL PHASE";
+  link.innerHTML = "> INITIATE PHASE 3";
 
   container.appendChild(p1);
   container.appendChild(p2);
@@ -133,11 +119,9 @@ function showNextPhase() {
   container.appendChild(link);
 }
 
-// ===== INIT =====
 window.onload = () => {
-  setTimeout(typeLine, 800);
+  setTimeout(typeLine, 700);
 };
-
 </script>
 
 </body>
