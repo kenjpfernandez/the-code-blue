@@ -9,26 +9,9 @@
 
 <div class="terminal">
   <h1>HOSPITAL INCIDENT ACCESS</h1>
-
   <div id="boot"></div>
 
   <div id="inputSection" style="display:none;">
-    <hr>
-
-    <div class="summary-box">
-      <p>At 10:47 AM, a patient in Room 314 suffers a sudden deterioration and a Code Blue is activated.</p>
-      <p>The patient survives.</p>
-      <p>Hospital leadership launches an internal review.</p>
-      <p>Your teams have been appointed as the Rapid Incident Review Committee.</p>
-      <br>
-      <p><strong>Your mission:</strong></p>
-      <p>Day 1: Determine what happened.</p>
-      <p>Day 2: Determine what caused it.</p>
-      <p>Day 3: Determine why it wasn't prevented.</p>
-    </div>
-
-    <hr>
-
     <p>> Enter team designation:</p>
     <input type="text" id="teamInput" placeholder="Team name">
 
@@ -42,25 +25,22 @@
 </div>
 
 <script>
-const lines = [
-  "> Connecting to hospital incident system...",
-  "> Loading patient safety review module...",
-  "> Case ID loaded: CB-314",
-  "> Critical event recorded: 10:47",
-  "> Room assignment pending verification...",
-  "> Preparing secure access...",
-  "> System ready."
+const bootLines = [
+  "> Booting hospital incident access terminal...",
+  "> Verifying system integrity...",
+  "> Loading authentication gateway...",
+  "> Connection established."
 ];
 
 let i = 0;
 const bootDiv = document.getElementById("boot");
 
 function typeLine() {
-  if (i < lines.length) {
+  if (i < bootLines.length) {
     const p = document.createElement("p");
     bootDiv.appendChild(p);
 
-    let text = lines[i];
+    let text = bootLines[i];
     let j = 0;
 
     const interval = setInterval(() => {
