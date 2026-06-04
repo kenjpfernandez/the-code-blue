@@ -8,55 +8,95 @@
 <body>
 
 <div class="terminal">
-
   <h1>SECURE HOSPITAL ACCESS</h1>
 
-  <p id="teamDisplay"></p>
-  <p class="muted">> Rapid Incident Review authentication required</p>
-  <p class="muted">> Case ID: CB-314</p>
-  <p class="muted">> Event: Code Blue recorded at 10:47</p>
-  <p class="muted">> Scope: Timeline, vitals, medication, escalation records</p>
+  <div id="boot"></div>
 
-  <hr>
+  <div id="inputSection" style="display:none;">
+    <hr>
 
-  <div class="summary-box">
-    <p>> Temporary credentials issued for review committee only</p>
-    <p>> Clearance level: Clinical Audit</p>
-    <p>> Access is being monitored</p>
+    <div class="summary-box">
+      <p>At 10:47 AM, a patient in ROOM 314 suffers a sudden deterioration and a CODE BLUE is activated.</p>
+      <p>The patient survives.</p>
+      <p>Hospital leadership launches an INTERNAL REVIEW.</p>
+      <p>Your team have been appointed as the Rapid Incident Review Committee.</p>
+      <br>
+      <p><strong>Your mission:</strong></p>
+      <p>Day 1: Determine what happened.</p>
+      <p>Day 2: Determine what caused it.</p>
+      <p>Day 3: Determine why it wasn't prevented.</p>
+    </div>
+
+    <hr>
+
+    <p id="teamDisplay"></p>
+    <p>> Enter credentials to continue</p>
+
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+
+    <button type="button" onclick="login()">LOGIN</button>
+
+    <p id="loginResponse"></p>
   </div>
-
-  <hr>
-
-  <p>> Enter credentials to continue</p>
-
-  <input type="text" id="username" placeholder="Username">
-  <input type="password" id="password" placeholder="Password">
-
-  <button type="button" onclick="login()">LOGIN</button>
-
-  <p id="loginResponse"></p>
-
 </div>
 
 <script>
-  const team = localStorage.getItem("teamName") || "UNKNOWN";
-  document.getElementById("teamDisplay").innerHTML = `> Team: ${team}`;
+const bootLines = [
+  "> Connecting to hospital incident system...",
+  "> Loading patient safety review module...",
+  "> Case ID Loaded: CB-314",
+  "> Critical Event Recorded: 10:47 AM",
+  "> Room assignment pending verification...",
+  "> Preparing secure access...",
+  "> System ready."
+];
 
-  function login() {
-    const user = document.getElementById("username").value.trim().toLowerCase();
-    const pass = document.getElementById("password").value.trim().toLowerCase();
-    const response = document.getElementById("loginResponse");
+let i = 0;
+const bootDiv = document.getElementById("boot");
 
-    // You can change these credentials anytime
-    if (user === "codeblue" && pass === "review314") {
-      response.innerHTML = "> ACCESS GRANTED...";
-      setTimeout(() => {
-        window.location.href = "terminal_day1.html";
-      }, 1200);
-    } else {
-      response.innerHTML = "> ACCESS DENIED";
-    }
+function typeLine() {
+  if (i < bootLines.length) {
+    const p = document.createElement("p");
+    bootDiv.appendChild(p);
+
+    let text = bootLines[i];
+    let j = 0;
+
+    const interval = setInterval(() => {
+      p.textContent = text.slice(0, j++);
+      if (j > text.length) {
+        clearInterval(interval);
+        i++;
+        setTimeout(typeLine, 250);
+      }
+    }, 20);
+  } else {
+    document.getElementById("inputSection").style.display = "block";
+
+    const team = localStorage.getItem("teamName") || "UNKNOWN";
+    document.getElementById("teamDisplay").innerHTML = `> Team: ${team}`;
   }
+}
+
+function login() {
+  const user = document.getElementById("username").value.trim().toLowerCase();
+  const pass = document.getElementById("password").value.trim().toLowerCase();
+  const response = document.getElementById("loginResponse");
+
+  if (user === "codeblue" && pass === "room314") {
+    response.innerHTML = "> ACCESS GRANTED...";
+    setTimeout(() => {
+      window.location.href = "terminal_day1.html";
+    }, 1200);
+  } else {
+    response.innerHTML = "> ACCESS DENIED";
+  }
+}
+
+window.onload = () => {
+  setTimeout(typeLine, 700);
+};
 </script>
 
 </body>
