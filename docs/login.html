@@ -11,6 +11,18 @@
   <h1>SECURE HOSPITAL ACCESS</h1>
 
   <p id="teamDisplay"></p>
+
+  <div id="briefing">
+    <p>> Rapid Incident Review Committee Access required</p>
+    <p>> Case ID: CB-314</p>
+    <p>> Event Time: 10:47</p>
+    <p>> Room No.: 314</p>
+    <p>> A temporary credentials issued for the review team only</p>
+    <p>> HINT: Username and Password are based on the case file</p>
+  </div>
+
+  <hr>
+
   <p>> Enter credentials to continue</p>
 
   <input type="text" id="username" placeholder="Username">
@@ -53,8 +65,10 @@
     const pass = document.getElementById("password").value.trim().toLowerCase();
     const response = document.getElementById("loginResponse");
 
-    if (user === "codeblue" && pass === "review314") {
-
+    // Suggested credentials:
+    // username = cb-314
+    // password = 1047
+    if (user === "cb-314" && pass === "1047") {
       document.getElementById("username").style.display = "none";
       document.getElementById("password").style.display = "none";
       document.querySelector('button[onclick="login()"]').style.display = "none";
@@ -84,7 +98,6 @@
 
           const interval = setInterval(() => {
             p.textContent = text.slice(0, j++);
-
             if (j > text.length) {
               clearInterval(interval);
               i++;
