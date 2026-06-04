@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       unlockModule(
         "mod2",
-        "https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgBu1ogMrJH9QozJe4ZRav0fAdgMtM3IZJ462VRLyzbrrHI?e=K3rP7m",
+        "https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgBu1ogMrJH9QozJe4ZRav0fAdgMtM3IZJ462VRLyzbrrHI?e=XqOQvt",
         "[2] Nursing Notes"
       );
     }
