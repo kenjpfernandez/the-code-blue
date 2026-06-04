@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       unlockModule(
         "mod2",
-        "YOUR-NURSING-NOTES-LINK",
+        "https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgBu1ogMrJH9QozJe4ZRav0fAdgMtM3IZJ462VRLyzbrrHI?e=K3rP7m",
         "[2] Nursing Notes"
       );
     }
@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       unlockModule(
         "mod3",
-        "YOUR-VITAL-SIGNS-LINK",
+        "https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgDZ7cMafoy7RJ1VAYJ7EenhAXJ9bFgGKylc5-q_AmKne0I?e=IXnUcI",
         "[3] Vital Signs"
       );
     }
@@ -105,7 +105,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       unlockModule(
         "mod4",
-        "YOUR-ROOM-ASSIGNMENT-LINK",
+        "https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgC9T8wOtdYCSKsIVz1HL4zVAQRpqDc_V0yS2EfjIBA8D7w?e=EAMmsg",
         "[4] Room Assignment"
       );
     }
@@ -123,7 +123,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       unlockModule(
         "mod5",
-        "YOUR-ADMISSION-RECORD-LINK",
+        "https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgA9wH4rIUuiSolmfr-1o9ByAdngOzaistfuE668Gctp3xk?e=YGXWH2",
         "[5] Admission Record"
       );
     }
@@ -141,7 +141,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       unlockModule(
         "mod6",
-        "YOUR-INCIDENT-TIMELINE-LINK",
+        "https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgAzeHiqYtF4QZLGlWgLIH8zAbhZpA8w8Bb_61H8pEHDkBY?e=S1CqyjK",
         "[6] Incident Timeline"
       );
     }
