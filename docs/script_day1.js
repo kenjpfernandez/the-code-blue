@@ -132,12 +132,12 @@ document.addEventListener("DOMContentLoaded", function () {
     // ADMISSION RECORD
     // =====================================
 
-    else if (code === "CARDIAC" && !progress.code5) {
+    else if (code === "ACUTECP" && !progress.code5) {
 
       progress.code5 = true;
 
       response.innerHTML =
-        "✔ Diagnosis Verified → Incident Timeline Unlocked";
+        "✔ Admission Diagnosis Verified → Incident Timeline Unlocked";
 
       unlockModule(
         "mod6",
