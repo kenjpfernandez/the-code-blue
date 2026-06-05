@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // VITAL SIGNS
     // =====================================
 
-    else if (code === "DROP" && !progress.code3) {
+    else if (code === "DECLINE" && !progress.code3) {
 
       progress.code3 = true;
 
@@ -114,12 +114,12 @@ document.addEventListener("DOMContentLoaded", function () {
     // ROOM ASSIGNMENT
     // =====================================
 
-    else if (code === "314" && !progress.code4) {
+    else if (code === "EASTWING" && !progress.code4) {
 
       progress.code4 = true;
 
       response.innerHTML =
-        "✔ Room Verified → Admission Record Unlocked";
+        "✔ Ward Location Verified → Admission Record Unlocked";
 
       unlockModule(
         "mod5",
