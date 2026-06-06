@@ -29,29 +29,35 @@
       text-decoration: none;
       font-weight: bold;
     }
+
+    .next-link:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
 
 <div class="terminal">
+
   <h1>ROOT CAUSE REVIEW</h1>
   <p>> Processing medication review...</p>
 
   <div id="content"></div>
   <div id="nextPhase"></div>
+
 </div>
 
 <script>
 const lines = [
   "> Pharmacy records reviewed.",
   "> Physician orders cross-checked.",
-  "> Lab results confirmed critical values.",
+  "> Lab results confirmed critical value.",
   "",
-  "> Medication interaction identified.",
-  "> Event classified as preventable.",
+  "> Interaction warning documented.",
+  "> Override recorded.",
+  "> Clinical deterioration followed.",
   "",
-  "> No equipment failure detected.",
-  "> No malicious action detected.",
+  "> Root cause classified as medication-related.",
   "",
   "> INCIDENT FILE SEALED"
 ];
