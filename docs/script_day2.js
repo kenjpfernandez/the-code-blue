@@ -13,8 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
     code1: false,
     code2: false,
     code3: false,
-    code4: false,
-    code5: false
+    code4: false
   };
 
   function updateProgress() {
@@ -22,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const progressEl = document.getElementById("progress");
 
     if (progressEl) {
-      progressEl.innerHTML = `Progress: ${count} / 5 Evidence Verified`;
+      progressEl.innerHTML = `Progress: ${count} / 4 Evidence Verified`;
     }
   }
 
@@ -47,30 +46,41 @@ document.addEventListener("DOMContentLoaded", function () {
     if (code === "MED-A12" && !progress.code1) {
       progress.code1 = true;
       response.innerHTML = "✔ Medication Verified → Pharmacy Logs Unlocked";
-      unlockModule("mod2", "https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgADqzzzuinuQ5HK9inKxqKBATU0yW4KTpZxNo0STcW50y8?e=QDSbMQ", "[2] Pharmacy Logs");
+      unlockModule(
+        "mod2",
+        "https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgADqzzzuinuQ5HK9inKxqKBATU0yW4KTpZxNo0STcW50y8?e=QDSbMQ",
+        "[2] Pharmacy Logs"
+      );
     }
 
     else if (code === "OVERRIDE" && !progress.code2) {
       progress.code2 = true;
       response.innerHTML = "✔ Override Confirmed → Physician Orders Unlocked";
-      unlockModule("mod3", "https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgCAr7jROrWMR7XOyLCInwX_AUhN4lGbYvxv2856xYUgVlo?e=KWr7Zq", "[3] Physician Orders");
+      unlockModule(
+        "mod3",
+        "https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgCAr7jROrWMR7XOyLCInwX_AUhN4lGbYvxv2856xYUgVlo?e=KWr7Zq",
+        "[3] Physician Orders"
+      );
     }
 
     else if (code === "INTERACTION" && !progress.code3) {
       progress.code3 = true;
       response.innerHTML = "✔ Interaction Flagged → Lab Results Unlocked";
-      unlockModule("mod4", "https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgC8_DPQDpHoTpbP_b8Zu8EMAb889QZk416M3JswQUWbxik?e=CAGvVh", "[4] Lab Results");
+      unlockModule(
+        "mod4",
+        "https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgC8_DPQDpHoTpbP_b8Zu8EMAb889QZk416M3JswQUWbxik?e=CAGvVh",
+        "[4] Lab Results"
+      );
     }
 
     else if (code === "POTASSIUM" && !progress.code4) {
       progress.code4 = true;
       response.innerHTML = "✔ Critical Lab Value Verified → Dispensing History Unlocked";
-      unlockModule("mod5", "https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgCqj8W-WvdnSJbujA35XaIqAXhR6NlQcjmS4olfrATnAj4?e=r87SSg", "[5] Dispensing History");
-    }
-
-    else if (code === "TIMING" && !progress.code5) {
-      progress.code5 = true;
-      response.innerHTML = "✔ Timeline Verified → Final Root Cause Available";
+      unlockModule(
+        "mod5",
+        "https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgCqj8W-WvdnSJbujA35XaIqAXhR6NlQcjmS4olfrATnAj4?e=r87SSg",
+        "[5] Dispensing History"
+      );
     }
 
     else if (code === "MEDICATION INTERACTION") {
@@ -78,8 +88,7 @@ document.addEventListener("DOMContentLoaded", function () {
         progress.code1 &&
         progress.code2 &&
         progress.code3 &&
-        progress.code4 &&
-        progress.code5
+        progress.code4
       ) {
         response.innerHTML = "⚠ ROOT CAUSE CONFIRMED...";
         setTimeout(() => {
