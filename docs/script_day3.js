@@ -39,44 +39,62 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (!inputEl || !response) return;
 
-    const code = inputEl.value.trim().toUpperCase();
+    const raw = inputEl.value.trim().toUpperCase();
+    const code = raw.replace(/[^A-Z0-9]/g, "");
 
-    console.log("INPUT:", code);
+    console.log("INPUT:", raw);
 
-    if (code === "WARNING" && !progress.code1) {
+    if (code === "DETERIORATION" && !progress.code1) {
       progress.code1 = true;
-      response.innerHTML = "✔ Warning Flag Verified → Escalation Records Unlocked";
-      unlockModule("mod2", "YOUR-ALERT-LOGS-LINK", "[2] Alert Logs");
+      response.innerHTML = "✔ Clinical Deterioration Verified → Alert Logs Unlocked";
+      unlockModule(
+        "mod2",
+        "https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgBUTj3gEQnAQa0oIBlEOWyUAf_GjnH9mUufXZjCbwuR5GI?e=OYRxVV",
+        "[2] Alert Logs"
+      );
     }
 
-    else if (code === "MISSED" && !progress.code2) {
+    else if (code === "WARNING" && !progress.code2) {
       progress.code2 = true;
-      response.innerHTML = "✔ Missed Escalation Verified → Review Committee Unlocked";
-      unlockModule("mod3", "YOUR-ESCALATION-RECORDS-LINK", "[3] Escalation Records");
+      response.innerHTML = "✔ Warning Verified → Escalation Records Unlocked";
+      unlockModule(
+        "mod3",
+        "https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgDBQaAlkmtqS6We9e-xH7BPAeUXB5Cg-hdDIv0qdkGdPl0?e=KtY5e3",
+        "[3] Escalation Records"
+      );
     }
 
-    else if (code === "MULTIPLE" && !progress.code3) {
+    else if (code === "DELAY" && !progress.code3) {
       progress.code3 = true;
-      response.innerHTML = "✔ Multiple Opportunities Verified → Final Summary Unlocked";
-      unlockModule("mod4", "YOUR-REVIEW-COMMITTEE-LINK", "[4] Review Committee");
+      response.innerHTML = "✔ Delay Verified → Review Committee Unlocked";
+      unlockModule(
+        "mod4",
+        "https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgDFUmt928uiRrPw803uwi4BAXZsRN_C-o874u7CVHZ_Ktw?e=HPhhal",
+        "[4] Review Committee"
+      );
     }
 
-    else if (code === "MONITOR" && !progress.code4) {
+    else if (code === "MULTIPLE" && !progress.code4) {
       progress.code4 = true;
-      response.innerHTML = "✔ Monitoring Instruction Verified → Final Summary Available";
-      unlockModule("mod5", "YOUR-FINAL-SUMMARY-LINK", "[5] Final Summary");
+      response.innerHTML = "✔ Multiple Opportunities Verified → Final RCA Unlocked";
+      unlockModule(
+        "mod5",
+        "https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgDxHDdGNQmuRa7N6AvE4OecAanOkV9CmHQBZZGHRyxjXlE?e=qjRceD",
+        "[5] Final RCA"
+      );
     }
 
-    else if (code === "EARLY WARNING MISSED") {
+    else if (code === "ESCALATIONDELAY") {
       if (
         progress.code1 &&
         progress.code2 &&
         progress.code3 &&
         progress.code4
       ) {
-        response.innerHTML = "⚠ ROOT CAUSE CONFIRMED...";
+        response.innerHTML = "⚠ ROOT CAUSE ANALYSIS COMPLETE...";
+
         localStorage.setItem("day3Complete", "true");
-        localStorage.setItem("day3Result", "EARLY WARNING MISSED");
+        localStorage.setItem("day3Result", "ESCALATION DELAY");
 
         setTimeout(() => {
           window.location.href = "puzzles/day3_end.html";
