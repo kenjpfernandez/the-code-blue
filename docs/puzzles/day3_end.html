@@ -2,9 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Code Blue — Final Review Complete</title>
+  <title>Code Blue — Root Cause Analysis Complete</title>
   <link rel="stylesheet" href="../styles.css">
+
   <style>
+
     .glitch {
       animation: glitch 0.2s infinite;
     }
@@ -21,40 +23,45 @@
       color: #ff6b6b;
       margin-top: 20px;
     }
+
   </style>
+
 </head>
 <body>
 
 <div class="terminal">
-  <h1>FINAL REVIEW COMPLETE</h1>
-  <p>> Processing root cause analysis...</p>
+
+  <h1>ROOT CAUSE ANALYSIS COMPLETE</h1>
+
+  <p>> Final review processing...</p>
 
   <div id="content"></div>
+
 </div>
 
 <script>
+
 const lines = [
-  "> Shift handover reviewed.",
-  "> Alert logs verified.",
-  "> Escalation records confirmed.",
-  "> Review committee notes processed.",
+
+  "> Incident review finalized.",
+  "> Committee findings verified.",
   "",
-  "> Early warning signs were documented.",
-  "> Warning signals were not escalated in time.",
+  "> Timeline reconstruction complete.",
+  "> Clinical trigger identified.",
+  "> Contributing factor identified.",
   "",
-  "> Root cause classification complete.",
-  "",
-  "> Event deemed preventable.",
-  "> Patient status: Stable",
-  "",
-  "> CASE ARCHIVED"
+  "> Compiling final report...",
+  ""
 ];
 
 let i = 0;
+
 const contentDiv = document.getElementById("content");
 
 function typeLine() {
+
   if (i < lines.length) {
+
     const p = document.createElement("p");
     contentDiv.appendChild(p);
 
@@ -62,36 +69,103 @@ function typeLine() {
     let j = 0;
 
     const interval = setInterval(() => {
+
       p.textContent = text.slice(0, j++);
+
       if (j > text.length) {
+
         clearInterval(interval);
+
         i++;
+
         setTimeout(typeLine, 350);
       }
+
     }, 20);
-  } else {
+
+  }
+
+  else {
+
     triggerFinal();
   }
 }
 
 function triggerFinal() {
+
   document.body.classList.add("glitch");
 
-  const finalMsg = document.createElement("p");
-  finalMsg.className = "warning";
-  finalMsg.innerHTML = "> EARLY WARNING MISSED<br>> ROOT CAUSE CONFIRMED";
-  contentDiv.appendChild(finalMsg);
+  const report = document.createElement("div");
+
+  report.innerHTML = `
+
+    <br>
+
+    <h2>FINAL RCA SUMMARY</h2>
+
+    <p><strong>Event</strong></p>
+    <p>Code Blue activated at 10:47</p>
+
+    <br>
+
+    <p><strong>Clinical Trigger</strong></p>
+    <p>Medication Interaction</p>
+
+    <br>
+
+    <p><strong>Contributing Factor</strong></p>
+    <p>Escalation Delay</p>
+
+    <br>
+
+    <p><strong>Patient Outcome</strong></p>
+    <p>Patient stabilized following resuscitative efforts.</p>
+
+    <br>
+
+    <p><strong>Review Determination</strong></p>
+    <p>No malicious intent identified.</p>
+    <p>No equipment malfunction identified.</p>
+    <p>Event classified as preventable.</p>
+
+    <br>
+
+    <p class="warning">
+      > CASE ARCHIVED
+    </p>
+
+  `;
+
+  contentDiv.appendChild(report);
 
   setTimeout(() => {
-    const endMsg = document.createElement("p");
-    endMsg.innerHTML = "<br>> Session complete.";
-    contentDiv.appendChild(endMsg);
+
+    const finalMsg = document.createElement("p");
+
+    finalMsg.innerHTML = `
+
+      <br>
+
+      > Thank you for completing the review.
+
+      <br><br>
+
+      > Session complete.
+
+    `;
+
+    contentDiv.appendChild(finalMsg);
+
   }, 1500);
+
 }
 
 window.onload = () => {
+
   setTimeout(typeLine, 700);
+
 };
+
 </script>
 
 </body>
