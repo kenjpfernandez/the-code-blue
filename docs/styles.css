@@ -1,16 +1,12 @@
-/* ===========================
-   CODE BLUE — HOSPITAL SYSTEM
-   =========================== */
-
 :root {
-  --bg: #081014;
-  --panel: #0e1a1f;
-  --panel-2: #10262c;
-  --line: rgba(97, 220, 190, 0.25);
-  --text: #d8fff4;
-  --muted: #8ab7ae;
-  --accent: #61dcbe;
-  --accent-2: #9cf2df;
+  --bg: #071014;
+  --panel: #0f1c22;
+  --panel-2: #12262d;
+  --line: rgba(120, 220, 205, 0.18);
+  --text: #d7fff4;
+  --muted: #8cb7b0;
+  --accent: #66ddc6;
+  --accent-2: #9cf0e1;
   --danger: #ff6b6b;
   --warning: #ffbf69;
   --success: #7ee081;
@@ -25,18 +21,21 @@ html, body {
   margin: 0;
   min-height: 100%;
   background:
-    radial-gradient(circle at top, rgba(97, 220, 190, 0.08), transparent 35%),
-    linear-gradient(180deg, #061014 0%, #081014 45%, #05090b 100%);
+    radial-gradient(circle at top, rgba(102, 221, 198, 0.08), transparent 35%),
+    linear-gradient(180deg, #061014 0%, #071014 48%, #05080a 100%);
   color: var(--text);
-  font-family: "Consolas", "Courier New", monospace;
+  font-family: Consolas, Monaco, "Courier New", monospace;
 }
 
-/* Main container */
+body {
+  line-height: 1.55;
+}
+
 .terminal {
   width: min(980px, calc(100% - 32px));
   margin: 24px auto;
   padding: 28px 30px;
-  background: linear-gradient(180deg, rgba(16, 38, 44, 0.96), rgba(10, 20, 24, 0.98));
+  background: linear-gradient(180deg, rgba(18, 38, 45, 0.96), rgba(10, 20, 24, 0.98));
   border: 1px solid var(--line);
   border-radius: 18px;
   box-shadow: 0 18px 40px var(--shadow);
@@ -44,25 +43,23 @@ html, body {
   overflow: hidden;
 }
 
-/* subtle top bar */
 .terminal::before {
   content: "";
   display: block;
   height: 6px;
   width: 100%;
-  background: linear-gradient(90deg, var(--accent), rgba(97, 220, 190, 0.2), transparent);
+  background: linear-gradient(90deg, var(--accent), rgba(102, 221, 198, 0.2), transparent);
   margin-bottom: 18px;
   border-radius: 999px;
   opacity: 0.9;
 }
 
-/* Typography */
 h1 {
-  margin: 0 0 12px;
+  margin: 0 0 10px;
   font-size: 30px;
-  letter-spacing: 1.5px;
+  letter-spacing: 1.4px;
   color: var(--accent-2);
-  text-shadow: 0 0 10px rgba(97, 220, 190, 0.12);
+  text-shadow: 0 0 10px rgba(102, 221, 198, 0.12);
 }
 
 h2 {
@@ -74,41 +71,14 @@ h2 {
 
 p {
   margin: 8px 0;
-  line-height: 1.55;
-  color: var(--text);
 }
 
-small {
-  color: var(--muted);
-}
-
-/* Separators */
 hr {
   border: 0;
   border-top: 1px solid var(--line);
   margin: 18px 0;
 }
 
-/* Status text */
-.status {
-  color: var(--danger);
-  font-weight: bold;
-  letter-spacing: 0.5px;
-}
-
-.warning {
-  color: var(--danger);
-}
-
-.success {
-  color: var(--success);
-}
-
-.muted {
-  color: var(--muted);
-}
-
-/* Links */
 a {
   color: var(--accent-2);
   text-decoration: none;
@@ -122,7 +92,6 @@ a:visited {
   color: var(--accent-2);
 }
 
-/* Lists */
 ul {
   margin: 10px 0 0;
   padding-left: 20px;
@@ -130,21 +99,8 @@ ul {
 
 li {
   margin: 8px 0;
-  line-height: 1.45;
 }
 
-/* Locked modules */
-.locked {
-  color: rgba(160, 190, 185, 0.7);
-}
-
-.locked::after {
-  content: "  [LOCKED]";
-  color: var(--warning);
-  font-size: 0.92em;
-}
-
-/* Inputs */
 input {
   display: block;
   width: min(520px, 100%);
@@ -152,29 +108,27 @@ input {
   margin-bottom: 10px;
   padding: 12px 14px;
   border-radius: 12px;
-  border: 1px solid rgba(97, 220, 190, 0.35);
-  background: rgba(4, 12, 14, 0.85);
+  border: 1px solid rgba(102, 221, 198, 0.35);
+  background: rgba(4, 12, 14, 0.88);
   color: var(--text);
   font-family: inherit;
   font-size: 15px;
   outline: none;
-  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.12);
 }
 
 input::placeholder {
-  color: rgba(217, 255, 245, 0.38);
+  color: rgba(215, 255, 244, 0.38);
 }
 
 input:focus {
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(97, 220, 190, 0.14);
+  box-shadow: 0 0 0 3px rgba(102, 221, 198, 0.14);
 }
 
-/* Buttons */
 button {
   appearance: none;
-  border: 1px solid rgba(97, 220, 190, 0.38);
-  background: linear-gradient(180deg, #64e0c2, #3aa893);
+  border: 1px solid rgba(102, 221, 198, 0.38);
+  background: linear-gradient(180deg, #67e0c8, #3aa893);
   color: #041014;
   font-family: inherit;
   font-weight: 700;
@@ -202,7 +156,54 @@ button:disabled {
   transform: none;
 }
 
-/* Response / messages */
+.status {
+  color: var(--danger);
+  font-weight: 700;
+  letter-spacing: 0.4px;
+}
+
+.warning {
+  color: var(--danger);
+}
+
+.success {
+  color: var(--success);
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.subtle-note {
+  color: var(--muted);
+  margin-top: 6px;
+}
+
+.summary-box {
+  margin-top: 16px;
+  padding: 16px 18px;
+  background: rgba(11, 26, 30, 0.9);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+}
+
+.locked {
+  color: rgba(160, 190, 185, 0.72);
+}
+
+.locked::after {
+  content: "  [LOCKED]";
+  color: var(--warning);
+  font-size: 0.92em;
+}
+
+.module-hint {
+  margin-top: 4px;
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: 0.3px;
+}
+
 #response,
 #loginResponse {
   margin-top: 14px;
@@ -213,15 +214,69 @@ button:disabled {
   min-height: 22px;
 }
 
-/* Progress display */
 #progress {
   margin-top: 6px;
   color: var(--muted);
 }
 
-/* Glitch animation */
+/* Optional record styling for future use */
+.record-grid {
+  display: grid;
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.record-card {
+  background: rgba(7, 16, 18, 0.75);
+  border: 1px solid rgba(102, 221, 198, 0.18);
+  border-radius: 14px;
+  padding: 14px 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+}
+
+.record-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.record-id {
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: var(--muted);
+}
+
+.record-status {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.record-status.open {
+  color: var(--success);
+}
+
+.record-status.pending {
+  color: var(--warning);
+}
+
+.record-title {
+  margin: 0;
+  font-size: 18px;
+  color: var(--text);
+}
+
+.record-meta {
+  margin: 6px 0 0;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* No glitch by default */
 .glitch {
-  animation: glitch 0.2s infinite;
+  animation: glitch 0.2s 3;
 }
 
 @keyframes glitch {
@@ -231,52 +286,4 @@ button:disabled {
   60%  { transform: translate(1px, 1px); }
   80%  { transform: translate(-1px, -1px); }
   100% { transform: translate(0, 0); }
-}
-
-/* Terminal cursor-like emphasis */
-.cursor {
-  display: inline-block;
-  width: 10px;
-  color: var(--accent);
-  animation: blink 1s infinite;
-}
-
-@keyframes blink {
-  0%, 49% { opacity: 1; }
-  50%, 100% { opacity: 0; }
-}
-
-/* Day endings / summary pages */
-.summary-box {
-  margin-top: 16px;
-  padding: 16px 18px;
-  background: rgba(11, 26, 30, 0.9);
-  border: 1px solid var(--line);
-  border-radius: 14px;
-}
-
-/* Optional table styling for lab values / records */
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 14px 0;
-  font-size: 14px;
-  background: rgba(7, 16, 18, 0.65);
-  border: 1px solid var(--line);
-}
-
-th, td {
-  padding: 10px 12px;
-  border-bottom: 1px solid rgba(97, 220, 190, 0.12);
-  text-align: left;
-}
-
-th {
-  color: var(--accent);
-  font-weight: 700;
-  background: rgba(16, 38, 44, 0.95);
-}
-
-tr:hover td {
-  background: rgba(97, 220, 190, 0.04);
 }
