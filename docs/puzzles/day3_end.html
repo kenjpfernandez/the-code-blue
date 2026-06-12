@@ -1,99 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Code Blue — Root Cause Analysis Complete</title>
-  <link rel="stylesheet" href="../styles.css">
-
-  <style>
-
-    .glitch {
-      animation: glitch 0.2s infinite;
-    }
-
-    @keyframes glitch {
-      0% { transform: translate(0,0); }
-      25% { transform: translate(2px,-2px); }
-      50% { transform: translate(-2px,2px); }
-      75% { transform: translate(2px,2px); }
-      100% { transform: translate(0,0); }
-    }
-
-    .warning {
-      color: #ff6b6b;
-      margin-top: 20px;
-    }
-
-  </style>
-
-</head>
-<body>
-
-<div class="terminal">
-
-  <h1>ROOT CAUSE ANALYSIS COMPLETE</h1>
-
-  <p>> Final review processing...</p>
-
-  <div id="content"></div>
-
-</div>
-
-<script>
-
-const lines = [
-
-  "> Incident review finalized.",
-  "> Committee findings verified.",
-  "",
-  "> Timeline reconstruction complete.",
-  "> Clinical trigger identified.",
-  "> Contributing factor identified.",
-  "",
-  "> Compiling final report...",
-  ""
-];
-
-let i = 0;
-
-const contentDiv = document.getElementById("content");
-
-function typeLine() {
-
-  if (i < lines.length) {
-
-    const p = document.createElement("p");
-    contentDiv.appendChild(p);
-
-    let text = lines[i];
-    let j = 0;
-
-    const interval = setInterval(() => {
-
-      p.textContent = text.slice(0, j++);
-
-      if (j > text.length) {
-
-        clearInterval(interval);
-
-        i++;
-
-        setTimeout(typeLine, 350);
-      }
-
-    }, 20);
-
-  }
-
-  else {
-
-    triggerFinal();
-  }
-}
-
 function triggerFinal() {
-
-  document.body.classList.add("glitch");
 
   const report = document.createElement("div");
 
@@ -108,7 +13,7 @@ function triggerFinal() {
 
     <br>
 
-    <p><strong>Clinical Trigger</strong></p>
+    <p><strong>Primary Clinical Trigger</strong></p>
     <p>Medication Interaction</p>
 
     <br>
@@ -123,10 +28,10 @@ function triggerFinal() {
 
     <br>
 
-    <p><strong>Review Determination</strong></p>
-    <p>No malicious intent identified.</p>
-    <p>No equipment malfunction identified.</p>
-    <p>Event classified as preventable.</p>
+    <p><strong>Review Committee Determination</strong></p>
+    <p>The event was determined to be preventable.</p>
+    <p>Warning signs were identified prior to clinical deterioration.</p>
+    <p>A delay occurred between recognition of worsening symptoms and escalation of care.</p>
 
     <br>
 
@@ -139,6 +44,11 @@ function triggerFinal() {
   contentDiv.appendChild(report);
 
   setTimeout(() => {
+
+    // 🔊 Play archive sound
+    const archiveSound = new Audio("../assets/archive.mp3");
+    archiveSound.volume = 0.6;
+    archiveSound.play();
 
     const finalMsg = document.createElement("p");
 
@@ -159,14 +69,3 @@ function triggerFinal() {
   }, 1500);
 
 }
-
-window.onload = () => {
-
-  setTimeout(typeLine, 700);
-
-};
-
-</script>
-
-</body>
-</html>
