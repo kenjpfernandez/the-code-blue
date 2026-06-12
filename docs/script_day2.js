@@ -1,3 +1,30 @@
+const sounds = {
+  login: new Audio("assets/login_beep.mp3"),
+  unlock: new Audio("assets/unlock.mp3"),
+  warning: new Audio("assets/warning.mp3"),
+  archive: new Audio("assets/archive.mp3")
+};
+
+sounds.login.volume = 0.5;
+sounds.unlock.volume = 0.5;
+sounds.warning.volume = 0.6;
+sounds.archive.volume = 0.6;
+
+document.addEventListener("click", () => {
+
+  Object.values(sounds).forEach(sound => {
+
+    sound.play()
+      .then(() => {
+        sound.pause();
+        sound.currentTime = 0;
+      })
+      .catch(() => {});
+
+  });
+
+}, { once: true });
+
 document.addEventListener("DOMContentLoaded", function () {
 
   console.log("Code Blue Day 2 Loaded");
