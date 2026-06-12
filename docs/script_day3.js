@@ -134,7 +134,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       unlockModule(
         "mod3",
-        "YOUR-ESCALATION-RECORDS-LINK",
+        "https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgDBQaAlkmtqS6We9e-xH7BPAYflbNdEVtMe6FW_rnaiqTw?e=pgJdix",
         "[3] Escalation Records"
       );
     }
@@ -152,7 +152,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       unlockModule(
         "mod4",
-        "YOUR-REVIEW-COMMITTEE-LINK",
+        "https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgDFUmt928uiRrPw803uwi4BAbkQyUCFldX-5QBS7MupqIY?e=RnxFYC",
         "[4] Review Committee"
       );
     }
@@ -170,7 +170,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       unlockModule(
         "mod5",
-        "YOUR-FINAL-RCA-LINK",
+        "https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgDxHDdGNQmuRa7N6AvE4OecAR5IK8WPCu0qI7AF3uXTQoI?e=TpzphO",
         "[5] Final RCA"
       );
     }
