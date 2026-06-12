@@ -72,6 +72,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (code === "MED-A12" && !progress.code1) {
       progress.code1 = true;
+
+      sounds.unlock.currentTime = 0;
+      sounds.unlock.play();
+      
       response.innerHTML = "✔ Medication Verified → Pharmacy Logs Unlocked";
       unlockModule(
         "mod2",
@@ -82,6 +86,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     else if (code === "OVERRIDE" && !progress.code2) {
       progress.code2 = true;
+
+      sounds.unlock.currentTime = 0;
+      sounds.unlock.play();
+      
       response.innerHTML = "✔ Override Confirmed → Physician Orders Unlocked";
       unlockModule(
         "mod3",
@@ -92,6 +100,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     else if (code === "INTERACTION" && !progress.code3) {
       progress.code3 = true;
+
+      sounds.unlock.currentTime = 0;
+      sounds.unlock.play();
+      
       response.innerHTML = "✔ Interaction Flagged → Lab Results Unlocked";
       unlockModule(
         "mod4",
@@ -102,6 +114,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     else if (code === "POTASSIUM" && !progress.code4) {
       progress.code4 = true;
+
+      sounds.unlock.currentTime = 0;
+      sounds.unlock.play();
+      
       response.innerHTML = "✔ Critical Lab Value Verified → Dispensing History Unlocked";
       unlockModule(
         "mod5",
