@@ -1,33 +1,53 @@
-const sounds = {
-  login: new Audio("assets/login_beep.mp3"),
-  unlock: new Audio("assets/unlock.mp3"),
-  warning: new Audio("assets/warning.mp3"),
-  archive: new Audio("assets/archive.mp3")
-};
-
-sounds.login.volume = 0.5;
-sounds.unlock.volume = 0.5;
-sounds.warning.volume = 0.6;
-sounds.archive.volume = 0.6;
-
-document.addEventListener("click", () => {
-
-  Object.values(sounds).forEach(sound => {
-
-    sound.play()
-      .then(() => {
-        sound.pause();
-        sound.currentTime = 0;
-      })
-      .catch(() => {});
-
-  });
-
-}, { once: true });
-
 document.addEventListener("DOMContentLoaded", function () {
 
   console.log("Code Blue Day 2 Loaded");
+
+  // ==========================
+  // AUDIO
+  // ==========================
+
+  const sounds = {
+    login: new Audio("./assets/login_beep.mp3"),
+    unlock: new Audio("./assets/unlock.mp3"),
+    warning: new Audio("./assets/warning.mp3"),
+    archive: new Audio("./assets/archive.mp3")
+  };
+
+  sounds.login.volume = 0.5;
+  sounds.unlock.volume = 0.5;
+  sounds.warning.volume = 0.6;
+  sounds.archive.volume = 0.6;
+
+  function playSound(sound) {
+    if (!sound) return;
+
+    try {
+      sound.currentTime = 0;
+      sound.play().catch(() => {});
+    } catch (err) {
+      console.log("Audio playback blocked or unavailable:", err);
+    }
+  }
+
+  // Optional: unlock browser audio after first user click
+  document.addEventListener("click", () => {
+    Object.values(sounds).forEach(sound => {
+      try {
+        sound.play()
+          .then(() => {
+            sound.pause();
+            sound.currentTime = 0;
+          })
+          .catch(() => {});
+      } catch (err) {
+        // ignore
+      }
+    });
+  }, { once: true });
+
+  // ==========================
+  // TEAM DISPLAY
+  // ==========================
 
   const team = localStorage.getItem("teamName") || "UNKNOWN";
   const teamEl = document.getElementById("teamDisplay");
@@ -35,6 +55,10 @@ document.addEventListener("DOMContentLoaded", function () {
   if (teamEl) {
     teamEl.innerHTML = `> Team: ${team}`;
   }
+
+  // ==========================
+  // PROGRESS TRACKING
+  // ==========================
 
   let progress = {
     code1: false,
@@ -52,6 +76,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+  // ==========================
+  // MODULE UNLOCKER
+  // ==========================
+
   function unlockModule(id, link, label) {
     const el = document.getElementById(id);
     if (!el) return;
@@ -60,6 +88,10 @@ document.addEventListener("DOMContentLoaded", function () {
     el.innerHTML = `<a href="${link}" target="_blank">${label}</a>`;
   }
 
+  // ==========================
+  // MAIN CODE SYSTEM
+  // ==========================
+
   window.checkCode = function () {
     const inputEl = document.getElementById("codeInput");
     const response = document.getElementById("response");
@@ -67,16 +99,19 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!inputEl || !response) return;
 
     const code = inputEl.value.trim().toUpperCase();
-
     console.log("INPUT:", code);
+
+    // =====================================
+    // MEDICATION RECORDS
+    // =====================================
 
     if (code === "MED-A12" && !progress.code1) {
       progress.code1 = true;
+      playSound(sounds.unlock);
 
-      sounds.unlock.currentTime = 0;
-      sounds.unlock.play();
-      
-      response.innerHTML = "✔ Medication Verified → Pharmacy Logs Unlocked";
+      response.innerHTML =
+        "✔ Medication Verified → Pharmacy Logs Unlocked";
+
       unlockModule(
         "mod2",
         "https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgADqzzzuinuQ5HK9inKxqKBATU0yW4KTpZxNo0STcW50y8?e=QDSbMQ",
@@ -84,13 +119,17 @@ document.addEventListener("DOMContentLoaded", function () {
       );
     }
 
+    // =====================================
+    // PHARMACY LOGS
+    // =====================================
+
     else if (code === "OVERRIDE" && !progress.code2) {
       progress.code2 = true;
+      playSound(sounds.unlock);
 
-      sounds.unlock.currentTime = 0;
-      sounds.unlock.play();
-      
-      response.innerHTML = "✔ Override Confirmed → Physician Orders Unlocked";
+      response.innerHTML =
+        "✔ Override Confirmed → Physician Orders Unlocked";
+
       unlockModule(
         "mod3",
         "https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgCAr7jROrWMR7XOyLCInwX_AUhN4lGbYvxv2856xYUgVlo?e=KWr7Zq",
@@ -98,13 +137,17 @@ document.addEventListener("DOMContentLoaded", function () {
       );
     }
 
+    // =====================================
+    // PHYSICIAN ORDERS
+    // =====================================
+
     else if (code === "INTERACTION" && !progress.code3) {
       progress.code3 = true;
+      playSound(sounds.unlock);
 
-      sounds.unlock.currentTime = 0;
-      sounds.unlock.play();
-      
-      response.innerHTML = "✔ Interaction Flagged → Lab Results Unlocked";
+      response.innerHTML =
+        "✔ Interaction Flagged → Lab Results Unlocked";
+
       unlockModule(
         "mod4",
         "https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgC8_DPQDpHoTpbP_b8Zu8EMAb889QZk416M3JswQUWbxik?e=CAGvVh",
@@ -112,19 +155,27 @@ document.addEventListener("DOMContentLoaded", function () {
       );
     }
 
+    // =====================================
+    // LAB RESULTS
+    // =====================================
+
     else if (code === "POTASSIUM" && !progress.code4) {
       progress.code4 = true;
+      playSound(sounds.unlock);
 
-      sounds.unlock.currentTime = 0;
-      sounds.unlock.play();
-      
-      response.innerHTML = "✔ Critical Lab Value Verified → Dispensing History Unlocked";
+      response.innerHTML =
+        "✔ Critical Lab Value Verified → Dispensing History Unlocked";
+
       unlockModule(
         "mod5",
         "https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgCqj8W-WvdnSJbujA35XaIqAXhR6NlQcjmS4olfrATnAj4?e=r87SSg",
         "[5] Dispensing History"
       );
     }
+
+    // =====================================
+    // FINAL ANSWER
+    // =====================================
 
     else if (code === "MEDICATION INTERACTION") {
       if (
@@ -134,6 +185,8 @@ document.addEventListener("DOMContentLoaded", function () {
         progress.code4
       ) {
         response.innerHTML = "⚠ ROOT CAUSE CONFIRMED...";
+        playSound(sounds.warning);
+
         setTimeout(() => {
           window.location.href = "puzzles/day2_end.html";
         }, 1500);
@@ -141,6 +194,10 @@ document.addEventListener("DOMContentLoaded", function () {
         response.innerHTML = "✖ INCOMPLETE DATA. MORE EVIDENCE REQUIRED.";
       }
     }
+
+    // =====================================
+    // INVALID
+    // =====================================
 
     else {
       response.innerHTML = "✖ INVALID OR ALREADY USED CODE";
@@ -151,4 +208,5 @@ document.addEventListener("DOMContentLoaded", function () {
   };
 
   updateProgress();
+
 });
