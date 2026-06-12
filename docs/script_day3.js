@@ -116,7 +116,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       unlockModule(
         "mod2",
-        "https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgBUTj3gEQnAQa0oIBlEOWyUARtygrbdrnWuSudOTuFtfuw?e=nlyMlo",
+        "https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgBUTj3gEQnAQa0oIBlEOWyUAf_GjnH9mUufXZjCbwuR5GI?e=I7orh2",
         "[2] Alert Logs"
       );
     }
@@ -134,7 +134,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       unlockModule(
         "mod3",
-        "https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgDBQaAlkmtqS6We9e-xH7BPAYflbNdEVtMe6FW_rnaiqTw?e=pgJdix",
+        "https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgDBQaAlkmtqS6We9e-xH7BPAeUXB5Cg-hdDIv0qdkGdPl0?e=p6W9ZG",
         "[3] Escalation Records"
       );
     }
@@ -152,7 +152,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       unlockModule(
         "mod4",
-        "https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgDFUmt928uiRrPw803uwi4BAbkQyUCFldX-5QBS7MupqIY?e=RnxFYC",
+        "https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgDFUmt928uiRrPw803uwi4BAXZsRN_C-o874u7CVHZ_Ktw?e=CDuJYc",
         "[4] Review Committee"
       );
     }
@@ -170,7 +170,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       unlockModule(
         "mod5",
-        "https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgDxHDdGNQmuRa7N6AvE4OecAR5IK8WPCu0qI7AF3uXTQoI?e=TpzphO",
+        "https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgDxHDdGNQmuRa7N6AvE4OecAanOkV9CmHQBZZGHRyxjXlE?e=X8DcQm",
         "[5] Final RCA"
       );
     }
