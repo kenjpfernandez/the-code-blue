@@ -91,6 +91,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
       progress.code1 = true;
 
+      sounds.unlock.currentTime = 0;
+      sounds.unlock.play();
+
       response.innerHTML =
         "✔ Admission Time Verified → Nursing Notes Unlocked";
 
@@ -108,6 +111,9 @@ document.addEventListener("DOMContentLoaded", function () {
     else if (code === "WEAKNESS" && !progress.code2) {
 
       progress.code2 = true;
+
+      sounds.unlock.currentTime = 0;
+      sounds.unlock.play();
 
       response.innerHTML =
         "✔ Symptom Pattern Verified → Vital Signs Unlocked";
@@ -127,6 +133,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
       progress.code3 = true;
 
+      sounds.unlock.currentTime = 0;
+      sounds.unlock.play();
+
       response.innerHTML =
         "✔ Vital Trend Verified → Room Assignment Unlocked";
 
@@ -145,6 +154,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
       progress.code4 = true;
 
+      sounds.unlock.currentTime = 0;
+      sounds.unlock.play();
+
       response.innerHTML =
         "✔ Ward Location Verified → Admission Record Unlocked";
 
@@ -162,6 +174,9 @@ document.addEventListener("DOMContentLoaded", function () {
     else if (code === "ACUTECP" && !progress.code5) {
 
       progress.code5 = true;
+
+      sounds.unlock.currentTime = 0;
+      sounds.unlock.play();
 
       response.innerHTML =
         "✔ Admission Diagnosis Verified → Incident Timeline Unlocked";
