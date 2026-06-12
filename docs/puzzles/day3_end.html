@@ -1,5 +1,66 @@
-function triggerFinal() {
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Code Blue — Root Cause Analysis Complete</title>
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    .warning {
+      color: #ff6b6b;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
 
+<div class="terminal">
+
+  <h1>ROOT CAUSE ANALYSIS COMPLETE</h1>
+
+  <p>> Final review processing...</p>
+
+  <div id="content"></div>
+
+</div>
+
+<script>
+const lines = [
+  "> Root Cause Analysis complete.",
+  "> Findings validated.",
+  "",
+  "> Timeline reconstruction complete.",
+  "> Clinical trigger identified.",
+  "> Contributing factor identified.",
+  "",
+  "> Compiling final report...",
+  ""
+];
+
+let i = 0;
+const contentDiv = document.getElementById("content");
+
+function typeLine() {
+  if (i < lines.length) {
+    const p = document.createElement("p");
+    contentDiv.appendChild(p);
+
+    let text = lines[i];
+    let j = 0;
+
+    const interval = setInterval(() => {
+      p.textContent = text.slice(0, j++);
+      if (j > text.length) {
+        clearInterval(interval);
+        i++;
+        setTimeout(typeLine, 350);
+      }
+    }, 20);
+  } else {
+    triggerFinal();
+  }
+}
+
+function triggerFinal() {
   const report = document.createElement("div");
 
   report.innerHTML = `
@@ -8,27 +69,27 @@ function triggerFinal() {
 
     <h2>FINAL RCA SUMMARY</h2>
 
-    <p><strong>Event</strong></p>
+    <p><strong>EVENT</strong></p>
     <p>Code Blue activated at 10:47</p>
 
     <br>
 
-    <p><strong>Primary Clinical Trigger</strong></p>
+    <p><strong>PRIMARY CLINICAL TRIGGER</strong></p>
     <p>Medication Interaction</p>
 
     <br>
 
-    <p><strong>Contributing Factor</strong></p>
+    <p><strong>CONTRIBUTING FACTOR</strong></p>
     <p>Escalation Delay</p>
 
     <br>
 
-    <p><strong>Patient Outcome</strong></p>
+    <p><strong>PATIENT OUTCOME</strong></p>
     <p>Patient stabilized following resuscitative efforts.</p>
 
     <br>
 
-    <p><strong>Review Committee Determination</strong></p>
+    <p><strong>REVIEW COMMITTEE DETERMINATION</strong></p>
     <p>The event was determined to be preventable.</p>
     <p>Warning signs were identified prior to clinical deterioration.</p>
     <p>A delay occurred between recognition of worsening symptoms and escalation of care.</p>
@@ -44,28 +105,26 @@ function triggerFinal() {
   contentDiv.appendChild(report);
 
   setTimeout(() => {
-
-    // 🔊 Play archive sound
+    // Play archive sound safely
     const archiveSound = new Audio("../assets/archive.mp3");
     archiveSound.volume = 0.6;
-    archiveSound.play();
+    archiveSound.play().catch(() => {});
 
     const finalMsg = document.createElement("p");
-
     finalMsg.innerHTML = `
-
       <br>
-
       > Thank you for completing the review.
-
       <br><br>
-
       > Session complete.
-
     `;
-
     contentDiv.appendChild(finalMsg);
-
   }, 1500);
-
 }
+
+window.onload = () => {
+  setTimeout(typeLine, 700);
+};
+</script>
+
+</body>
+</html>
