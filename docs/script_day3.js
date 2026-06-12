@@ -116,7 +116,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       unlockModule(
         "mod2",
-        "https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgBUTj3gEQnAQa0oIBlEOWyUARtygrbdrnWuSudOTuFtfuw?e=88nIHN",
+        "https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgBUTj3gEQnAQa0oIBlEOWyUARtygrbdrnWuSudOTuFtfuw?e=nlyMlo",
         "[2] Alert Logs"
       );
     }
