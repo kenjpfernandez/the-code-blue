@@ -1,35 +1,54 @@
-const sounds = {
-  login: new Audio("assets/login_beep.mp3"),
-  unlock: new Audio("assets/unlock.mp3"),
-  warning: new Audio("assets/warning.mp3"),
-  archive: new Audio("assets/archive.mp3")
-};
-
-sounds.login.volume = 0.5;
-sounds.unlock.volume = 0.5;
-sounds.warning.volume = 0.6;
-sounds.archive.volume = 0.6;
-
-document.addEventListener("click", () => {
-
-  Object.values(sounds).forEach(sound => {
-
-    sound.play()
-      .then(() => {
-        sound.pause();
-        sound.currentTime = 0;
-      })
-      .catch(() => {});
-
-  });
-
-}, { once: true });
-
 document.addEventListener("DOMContentLoaded", function () {
 
   console.log("Code Blue Day 1 Loaded");
 
-  // ===== TEAM DISPLAY =====
+  // ==========================
+  // AUDIO
+  // ==========================
+
+  const sounds = {
+    login: new Audio("./assets/login_beep.mp3"),
+    unlock: new Audio("./assets/unlock.mp3"),
+    warning: new Audio("./assets/warning.mp3"),
+    archive: new Audio("./assets/archive.mp3")
+  };
+
+  sounds.login.volume = 0.5;
+  sounds.unlock.volume = 0.5;
+  sounds.warning.volume = 0.6;
+  sounds.archive.volume = 0.6;
+
+  function playSound(sound) {
+    if (!sound) return;
+
+    try {
+      sound.currentTime = 0;
+      sound.play().catch(() => {});
+    } catch (err) {
+      console.log("Audio playback blocked or unavailable:", err);
+    }
+  }
+
+  // Optional: unlock browser audio after first user click
+  document.addEventListener("click", () => {
+    Object.values(sounds).forEach(sound => {
+      try {
+        sound.play()
+          .then(() => {
+            sound.pause();
+            sound.currentTime = 0;
+          })
+          .catch(() => {});
+      } catch (err) {
+        // ignore
+      }
+    });
+  }, { once: true });
+
+  // ==========================
+  // TEAM DISPLAY
+  // ==========================
+
   const team = localStorage.getItem("teamName") || "UNKNOWN";
   const teamEl = document.getElementById("teamDisplay");
 
@@ -37,7 +56,10 @@ document.addEventListener("DOMContentLoaded", function () {
     teamEl.innerHTML = `> Team: ${team}`;
   }
 
-  // ===== PROGRESS TRACKING =====
+  // ==========================
+  // PROGRESS TRACKING
+  // ==========================
+
   let progress = {
     code1: false,
     code2: false,
@@ -47,31 +69,31 @@ document.addEventListener("DOMContentLoaded", function () {
   };
 
   function updateProgress() {
-
     const count = Object.values(progress).filter(v => v).length;
-
     const progressEl = document.getElementById("progress");
 
     if (progressEl) {
-      progressEl.innerHTML =
-        `Progress: ${count} / 5 Evidence Verified`;
+      progressEl.innerHTML = `Progress: ${count} / 5 Evidence Verified`;
     }
   }
 
-  // ===== MODULE UNLOCKER =====
-  function unlockModule(id, link, label) {
+  // ==========================
+  // MODULE UNLOCKER
+  // ==========================
 
+  function unlockModule(id, link, label) {
     const el = document.getElementById(id);
 
     if (!el) return;
 
     el.classList.remove("locked");
-
-    el.innerHTML =
-      `<a href="${link}" target="_blank">${label}</a>`;
+    el.innerHTML = `<a href="${link}" target="_blank">${label}</a>`;
   }
 
-  // ===== MAIN CODE SYSTEM =====
+  // ==========================
+  // MAIN CODE SYSTEM
+  // ==========================
+
   window.checkCode = function () {
 
     const inputEl = document.getElementById("codeInput");
@@ -88,11 +110,8 @@ document.addEventListener("DOMContentLoaded", function () {
     // =====================================
 
     if (code === "0800" && !progress.code1) {
-
       progress.code1 = true;
-
-      sounds.unlock.currentTime = 0;
-      sounds.unlock.play();
+      playSound(sounds.unlock);
 
       response.innerHTML =
         "✔ Admission Time Verified → Nursing Notes Unlocked";
@@ -109,11 +128,8 @@ document.addEventListener("DOMContentLoaded", function () {
     // =====================================
 
     else if (code === "WEAKNESS" && !progress.code2) {
-
       progress.code2 = true;
-
-      sounds.unlock.currentTime = 0;
-      sounds.unlock.play();
+      playSound(sounds.unlock);
 
       response.innerHTML =
         "✔ Symptom Pattern Verified → Vital Signs Unlocked";
@@ -130,11 +146,8 @@ document.addEventListener("DOMContentLoaded", function () {
     // =====================================
 
     else if (code === "DECLINE" && !progress.code3) {
-
       progress.code3 = true;
-
-      sounds.unlock.currentTime = 0;
-      sounds.unlock.play();
+      playSound(sounds.unlock);
 
       response.innerHTML =
         "✔ Vital Trend Verified → Room Assignment Unlocked";
@@ -151,11 +164,8 @@ document.addEventListener("DOMContentLoaded", function () {
     // =====================================
 
     else if (code === "EASTWING" && !progress.code4) {
-
       progress.code4 = true;
-
-      sounds.unlock.currentTime = 0;
-      sounds.unlock.play();
+      playSound(sounds.unlock);
 
       response.innerHTML =
         "✔ Ward Location Verified → Admission Record Unlocked";
@@ -172,11 +182,8 @@ document.addEventListener("DOMContentLoaded", function () {
     // =====================================
 
     else if (code === "ACUTECP" && !progress.code5) {
-
       progress.code5 = true;
-
-      sounds.unlock.currentTime = 0;
-      sounds.unlock.play();
+      playSound(sounds.unlock);
 
       response.innerHTML =
         "✔ Admission Diagnosis Verified → Incident Timeline Unlocked";
@@ -193,7 +200,6 @@ document.addEventListener("DOMContentLoaded", function () {
     // =====================================
 
     else if (code === "1047") {
-
       if (
         progress.code1 &&
         progress.code2 &&
@@ -201,21 +207,14 @@ document.addEventListener("DOMContentLoaded", function () {
         progress.code4 &&
         progress.code5
       ) {
-
-        response.innerHTML =
-          "⚠ CODE BLUE TIMELINE CONFIRMED...";
+        response.innerHTML = "⚠ CODE BLUE TIMELINE CONFIRMED...";
+        playSound(sounds.warning);
 
         setTimeout(() => {
-
-          window.location.href =
-            "puzzles/day1_end.html";
-
+          window.location.href = "puzzles/day1_end.html";
         }, 1500);
-
       } else {
-
-        response.innerHTML =
-          "✖ INCOMPLETE DATA. MORE EVIDENCE REQUIRED.";
+        response.innerHTML = "✖ INCOMPLETE DATA. MORE EVIDENCE REQUIRED.";
       }
     }
 
@@ -224,13 +223,10 @@ document.addEventListener("DOMContentLoaded", function () {
     // =====================================
 
     else {
-
-      response.innerHTML =
-        "✖ INVALID OR ALREADY USED CODE";
+      response.innerHTML = "✖ INVALID OR ALREADY USED CODE";
     }
 
     inputEl.value = "";
-
     updateProgress();
   };
 
