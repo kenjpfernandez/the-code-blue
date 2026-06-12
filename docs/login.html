@@ -72,7 +72,9 @@
       document.getElementById("username").style.display = "none";
       document.getElementById("password").style.display = "none";
       document.querySelector('button[onclick="login()"]').style.display = "none";
-
+      
+      sounds.login.play();
+      
       response.innerHTML = "> ACCESS GRANTED...";
 
       const bootLines = [
