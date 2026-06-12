@@ -18,7 +18,7 @@
     }
 
     .warning {
-      color: #ff5c5c;
+      color: #ff6b6b;
       margin-top: 20px;
     }
 
@@ -54,10 +54,8 @@ const lines = [
   "> Initial review indicates a clinical event.",
   "> Root cause not yet confirmed.",
   "",
-  "> Medication records pending correlation.",
-  "> Pharmacy review scheduled.",
-  "",
-  "> INCIDENT FILE SEALED"
+  "> Medication review pending.",
+  "> Incident file sealed."
 ];
 
 let i = 0;
@@ -93,6 +91,11 @@ function triggerFinal() {
   contentDiv.appendChild(warning);
 
   setTimeout(() => {
+    // Play unlock sound safely
+    const unlockSound = new Audio("../assets/unlock.mp3");
+    unlockSound.volume = 0.6;
+    unlockSound.play().catch(() => {});
+
     const finalMsg = document.createElement("p");
     finalMsg.innerHTML = "<br>> You were not supposed to close the file this early.";
     contentDiv.appendChild(finalMsg);
@@ -107,7 +110,7 @@ function showNextPhase() {
   const container = document.getElementById("nextPhase");
 
   const p1 = document.createElement("p");
-  p1.innerHTML = "> New directive available...";
+  p1.innerHTML = "> New directive available.";
 
   const p2 = document.createElement("p");
   p2.innerHTML = "> Awaiting investigator input...";
