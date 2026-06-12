@@ -73,6 +73,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (code === "DETERIORATION" && !progress.code1) {
       progress.code1 = true;
+
+      sounds.unlock.currentTime = 0;
+      sounds.unlock.play();
+      
       response.innerHTML = "✔ Clinical Deterioration Verified → Alert Logs Unlocked";
       unlockModule(
         "mod2",
@@ -83,6 +87,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     else if (code === "WARNING" && !progress.code2) {
       progress.code2 = true;
+
+      sounds.unlock.currentTime = 0;
+      sounds.unlock.play();
+
       response.innerHTML = "✔ Warning Verified → Escalation Records Unlocked";
       unlockModule(
         "mod3",
@@ -93,6 +101,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     else if (code === "DELAY" && !progress.code3) {
       progress.code3 = true;
+
+      sounds.unlock.currentTime = 0;
+      sounds.unlock.play();
+      
       response.innerHTML = "✔ Delay Verified → Review Committee Unlocked";
       unlockModule(
         "mod4",
@@ -103,6 +115,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     else if (code === "MULTIPLE" && !progress.code4) {
       progress.code4 = true;
+
+      sounds.unlock.currentTime = 0;
+      sounds.unlock.play();
+
       response.innerHTML = "✔ Multiple Opportunities Verified → Final RCA Unlocked";
       unlockModule(
         "mod5",
@@ -122,6 +138,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         localStorage.setItem("day3Complete", "true");
         localStorage.setItem("day3Result", "ESCALATION DELAY");
+
+        sounds.warning.play();
 
         setTimeout(() => {
           window.location.href = "puzzles/day3_end.html";
