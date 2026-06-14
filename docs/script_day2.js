@@ -1,3 +1,14 @@
+const unlock =
+  GAME_SCHEDULE.day2Unlock.getTime();
+
+if (Date.now() < unlock) {
+
+  blockAccess(unlock);
+
+  return;
+
+}
+
 document.addEventListener("DOMContentLoaded", function () {
 
   console.log("Code Blue Day 2 Loaded");
