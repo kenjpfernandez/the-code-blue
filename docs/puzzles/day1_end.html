@@ -4,7 +4,9 @@
   <meta charset="UTF-8">
   <title>Code Blue — Day 1 Complete</title>
   <link rel="stylesheet" href="../styles.css">
+
   <style>
+
     .glitch {
       animation: glitch 0.2s 3;
     }
@@ -33,102 +35,206 @@
     .next-link:hover {
       text-decoration: underline;
     }
+
   </style>
+
 </head>
 <body>
 
 <div class="terminal">
+
   <h1>DAY 1 REVIEW COMPLETE</h1>
+
+  <p id="teamDisplay"></p>
+
   <p>> Processing incident timeline...</p>
 
   <div id="content"></div>
   <div id="nextPhase"></div>
+
 </div>
 
 <script>
+
+// ==========================
+// TEAM DISPLAY
+// ==========================
+
+const team =
+  localStorage.getItem("teamName") || "UNKNOWN";
+
+document.getElementById("teamDisplay").innerHTML =
+  `> Review Team: ${team}`;
+
+
+// ==========================
+// TYPEWRITER CONTENT
+// ==========================
+
 const lines = [
+
   "> Code Blue activation time confirmed.",
   "> Timeline reconstruction complete.",
   "> Patient deterioration documented.",
   "",
+
   "> Initial review indicates a clinical event.",
   "> Root cause not yet confirmed.",
   "",
+
   "> Medication review pending.",
   "> Incident file sealed."
+
 ];
 
 let i = 0;
-const contentDiv = document.getElementById("content");
+
+const contentDiv =
+  document.getElementById("content");
 
 function typeLine() {
+
   if (i < lines.length) {
-    const p = document.createElement("p");
+
+    const p =
+      document.createElement("p");
+
     contentDiv.appendChild(p);
 
     let text = lines[i];
     let j = 0;
 
-    const interval = setInterval(() => {
-      p.textContent = text.slice(0, j++);
-      if (j > text.length) {
-        clearInterval(interval);
-        i++;
-        setTimeout(typeLine, 350);
-      }
-    }, 20);
-  } else {
-    triggerFinal();
+    const interval =
+      setInterval(() => {
+
+        p.textContent =
+          text.slice(0, j++);
+
+        if (j > text.length) {
+
+          clearInterval(interval);
+
+          i++;
+
+          setTimeout(typeLine, 350);
+
+        }
+
+      }, 20);
+
   }
+
+  else {
+
+    triggerFinal();
+
+  }
+
 }
 
+
+// ==========================
+// FINAL SEQUENCE
+// ==========================
+
 function triggerFinal() {
+
   document.body.classList.add("glitch");
 
-  const warning = document.createElement("p");
+  const warning =
+    document.createElement("p");
+
   warning.className = "warning";
-  warning.innerHTML = "> REVIEW TRANSITIONED TO PHASE 2";
+
+  warning.innerHTML =
+    "> REVIEW TRANSITIONED TO PHASE 2";
+
   contentDiv.appendChild(warning);
 
   setTimeout(() => {
-    // Play unlock sound safely
-    const unlockSound = new Audio("../assets/unlock.mp3");
+
+    // 🔊 Safe unlock sound
+
+    const unlockSound =
+      new Audio("../assets/unlock.mp3");
+
     unlockSound.volume = 0.6;
+
     unlockSound.play().catch(() => {});
 
-    const finalMsg = document.createElement("p");
-    finalMsg.innerHTML = "<br>> You were not supposed to close the file this early.";
+    const finalMsg =
+      document.createElement("p");
+
+    finalMsg.innerHTML =
+      "<br>> You were not supposed to close the file this early.";
+
     contentDiv.appendChild(finalMsg);
 
-    localStorage.setItem("day1Complete", "true");
+    localStorage.setItem(
+      "day1Complete",
+      "true"
+    );
 
     setTimeout(showNextPhase, 1500);
+
   }, 1500);
+
 }
 
+
+// ==========================
+// PHASE 2 LINK
+// ==========================
+
 function showNextPhase() {
-  const container = document.getElementById("nextPhase");
 
-  const p1 = document.createElement("p");
-  p1.innerHTML = "> New directive available.";
+  const container =
+    document.getElementById("nextPhase");
 
-  const p2 = document.createElement("p");
-  p2.innerHTML = "> Awaiting investigator input...";
+  const p1 =
+    document.createElement("p");
 
-  const link = document.createElement("a");
-  link.href = "../terminal_day2.html";
-  link.className = "next-link";
-  link.innerHTML = "> INITIATE PHASE 2";
+  p1.innerHTML =
+    "> New directive available.";
+
+  const p2 =
+    document.createElement("p");
+
+  p2.innerHTML =
+    "> Awaiting investigator input...";
+
+  const link =
+    document.createElement("a");
+
+  link.href =
+    "../terminal_day2.html";
+
+  link.className =
+    "next-link";
+
+  link.innerHTML =
+    "> INITIATE PHASE 2";
 
   container.appendChild(p1);
   container.appendChild(p2);
-  container.appendChild(document.createElement("br"));
+  container.appendChild(
+    document.createElement("br")
+  );
   container.appendChild(link);
+
 }
 
+
+// ==========================
+// INIT
+// ==========================
+
 window.onload = () => {
+
   setTimeout(typeLine, 700);
+
 };
+
 </script>
 
 </body>
