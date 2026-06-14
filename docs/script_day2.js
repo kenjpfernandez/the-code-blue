@@ -12,8 +12,6 @@ document.addEventListener("DOMContentLoaded", function () {
   // rest of your code...
 });
 
-  console.log("Code Blue Day 2 Loaded");
-
   // ==========================
   // AUDIO
   // ==========================
