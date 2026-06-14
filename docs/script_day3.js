@@ -1,15 +1,16 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-  const unlock =
-  GAME_SCHEDULE.day3Unlock.getTime();
+  const unlock = GAME_SCHEDULE?.day3Unlock?.getTime();
 
-if (Date.now() < unlock) {
+  if (!unlock) {
+    console.error("day3Unlock is missing from game_schedule.js");
+    return;
+  }
 
-  blockAccess(unlock);
-
-  return;
-
-}
+  if (Date.now() < unlock) {
+    blockAccess(unlock);
+    return;
+  }
 
   console.log("Code Blue Day 3 Loaded");
 
@@ -96,7 +97,7 @@ if (Date.now() < unlock) {
     if (!el) return;
 
     el.classList.remove("locked");
-    el.innerHTML = `<a href="${link}" target="_blank">${label}</a>`;
+    el.innerHTML = `<a href="${link}" target="_blank" rel="noopener noreferrer">${label}</a>`;
   }
 
   // ==========================
@@ -230,44 +231,27 @@ if (Date.now() < unlock) {
 function blockAccess(unlockTime) {
 
   function render() {
-
-    const remaining =
-      unlockTime - Date.now();
+    const remaining = unlockTime - Date.now();
 
     if (remaining <= 0) {
-
       location.reload();
-
       return;
-
     }
 
-    const h =
-      Math.floor(remaining / 3600000);
-
-    const m =
-      Math.floor((remaining % 3600000) / 60000);
-
-    const s =
-      Math.floor((remaining % 60000) / 1000);
+    const h = Math.floor(remaining / 3600000);
+    const m = Math.floor((remaining % 3600000) / 60000);
+    const s = Math.floor((remaining % 60000) / 1000);
 
     document.body.innerHTML = `
       <div class="terminal">
-
         <h1>ACCESS RESTRICTED</h1>
-
         <p>> Next phase unavailable.</p>
-
         <p>> Unlock in:</p>
-
         <h2>${h}h ${m}m ${s}s</h2>
-
       </div>
     `;
   }
 
   render();
-
   setInterval(render, 1000);
-
 }
