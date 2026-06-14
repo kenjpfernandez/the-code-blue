@@ -40,6 +40,7 @@
 <div class="terminal">
 
   <h1>ROOT CAUSE REVIEW</h1>
+  <p id="teamDisplay"></p>
   <p>> Processing medication review...</p>
 
   <div id="content"></div>
@@ -48,6 +49,9 @@
 </div>
 
 <script>
+const team = localStorage.getItem("teamName") || "UNKNOWN";
+document.getElementById("teamDisplay").innerHTML = `> Investigative Team: ${team}`;
+
 const lines = [
   "> Pharmacy records reviewed.",
   "> Physician orders cross-checked.",
@@ -95,7 +99,6 @@ function triggerFinal() {
   contentDiv.appendChild(warning);
 
   setTimeout(() => {
-    // Safe warning sound
     const warningSound = new Audio("../assets/warning.mp3");
     warningSound.volume = 0.6;
     warningSound.play().catch(() => {});
