@@ -1,15 +1,16 @@
-const unlock =
-  GAME_SCHEDULE.day2Unlock.getTime();
-
-if (Date.now() < unlock) {
-
-  blockAccess(unlock);
-
-  return;
-
-}
-
 document.addEventListener("DOMContentLoaded", function () {
+
+  const unlock = GAME_SCHEDULE.day2Unlock.getTime();
+
+  if (Date.now() < unlock) {
+    blockAccess(unlock);
+    return;
+  }
+
+  console.log("Code Blue Day 2 Loaded");
+
+  // rest of your code...
+});
 
   console.log("Code Blue Day 2 Loaded");
 
