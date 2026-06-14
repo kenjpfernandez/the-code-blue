@@ -4,14 +4,52 @@
   <meta charset="UTF-8">
   <title>Code Blue — Entry Point</title>
   <link rel="stylesheet" href="styles.css">
+  <style>
+    #bgVideo {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -2;
+      opacity: 0.16;
+      pointer-events: none;
+    }
+
+    .bg-overlay {
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at top, rgba(102, 221, 198, 0.08), transparent 35%),
+        linear-gradient(180deg, rgba(6, 16, 20, 0.85), rgba(6, 16, 20, 0.94));
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .terminal {
+      position: relative;
+      z-index: 1;
+    }
+  </style>
 </head>
 <body>
 
+<video autoplay muted loop playsinline id="bgVideo">
+  <source src="assets/intro.mp4" type="video/mp4">
+</video>
+
+<div class="bg-overlay"></div>
+
 <div class="terminal">
   <h1>HOSPITAL INCIDENT ACCESS</h1>
+  <p class="subtle-note">ST. RAPHAEL MEDICAL CENTER</p>
+  <p class="subtle-note">Patient Safety Review System</p>
+
   <div id="boot"></div>
 
   <div id="inputSection" style="display:none;">
+    <hr>
+
     <p>> Enter team designation:</p>
     <input type="text" id="teamInput" placeholder="Team name">
 
@@ -26,10 +64,10 @@
 
 <script>
 const bootLines = [
-  "> Booting hospital incident access terminal...",
-  "> Verifying system integrity...",
-  "> Loading authentication gateway...",
-  "> Connection established."
+  "> Connecting to Hospital Incident Access Portal...",
+  "> Verifying Review Committee Credentials...",
+  "> Loading Clinical Incident Database...",
+  "> Access Gateway Ready."
 ];
 
 let i = 0;
