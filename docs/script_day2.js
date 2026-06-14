@@ -221,3 +221,48 @@ document.addEventListener("DOMContentLoaded", function () {
   updateProgress();
 
 });
+
+function blockAccess(unlockTime) {
+
+  function render() {
+
+    const remaining =
+      unlockTime - Date.now();
+
+    if (remaining <= 0) {
+
+      location.reload();
+
+      return;
+
+    }
+
+    const h =
+      Math.floor(remaining / 3600000);
+
+    const m =
+      Math.floor((remaining % 3600000) / 60000);
+
+    const s =
+      Math.floor((remaining % 60000) / 1000);
+
+    document.body.innerHTML = `
+      <div class="terminal">
+
+        <h1>ACCESS RESTRICTED</h1>
+
+        <p>> Next phase unavailable.</p>
+
+        <p>> Unlock in:</p>
+
+        <h2>${h}h ${m}m ${s}s</h2>
+
+      </div>
+    `;
+  }
+
+  render();
+
+  setInterval(render, 1000);
+
+}
