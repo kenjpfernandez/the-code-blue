@@ -1,6 +1,11 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-  const unlock = GAME_SCHEDULE.day2Unlock.getTime();
+  const unlock = GAME_SCHEDULE?.day2Unlock?.getTime();
+
+  if (!unlock) {
+    console.error("day2Unlock is missing from game_schedule.js");
+    return;
+  }
 
   if (Date.now() < unlock) {
     blockAccess(unlock);
@@ -8,8 +13,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   console.log("Code Blue Day 2 Loaded");
-
-});
 
   // ==========================
   // AUDIO
@@ -38,7 +41,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  // Optional: unlock browser audio after first user click
   document.addEventListener("click", () => {
     Object.values(sounds).forEach(sound => {
       try {
@@ -94,7 +96,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!el) return;
 
     el.classList.remove("locked");
-    el.innerHTML = `<a href="${link}" target="_blank">${label}</a>`;
+    el.innerHTML = `<a href="${link}" target="_blank" rel="noopener noreferrer">${label}</a>`;
   }
 
   // ==========================
@@ -110,16 +112,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const code = inputEl.value.trim().toUpperCase();
     console.log("INPUT:", code);
 
-    // =====================================
-    // MEDICATION RECORDS
-    // =====================================
-
     if (code === "MED-A12" && !progress.code1) {
       progress.code1 = true;
       playSound(sounds.unlock);
 
-      response.innerHTML =
-        "✔ Medication Verified → Pharmacy Logs Unlocked";
+      response.innerHTML = "✔ Medication Verified → Pharmacy Logs Unlocked";
 
       unlockModule(
         "mod2",
@@ -128,16 +125,11 @@ document.addEventListener("DOMContentLoaded", function () {
       );
     }
 
-    // =====================================
-    // PHARMACY LOGS
-    // =====================================
-
     else if (code === "OVERRIDE" && !progress.code2) {
       progress.code2 = true;
       playSound(sounds.unlock);
 
-      response.innerHTML =
-        "✔ Override Confirmed → Physician Orders Unlocked";
+      response.innerHTML = "✔ Override Confirmed → Physician Orders Unlocked";
 
       unlockModule(
         "mod3",
@@ -146,16 +138,11 @@ document.addEventListener("DOMContentLoaded", function () {
       );
     }
 
-    // =====================================
-    // PHYSICIAN ORDERS
-    // =====================================
-
     else if (code === "INTERACTION" && !progress.code3) {
       progress.code3 = true;
       playSound(sounds.unlock);
 
-      response.innerHTML =
-        "✔ Interaction Flagged → Lab Results Unlocked";
+      response.innerHTML = "✔ Interaction Flagged → Lab Results Unlocked";
 
       unlockModule(
         "mod4",
@@ -164,16 +151,11 @@ document.addEventListener("DOMContentLoaded", function () {
       );
     }
 
-    // =====================================
-    // LAB RESULTS
-    // =====================================
-
     else if (code === "POTASSIUM" && !progress.code4) {
       progress.code4 = true;
       playSound(sounds.unlock);
 
-      response.innerHTML =
-        "✔ Critical Lab Value Verified → Dispensing History Unlocked";
+      response.innerHTML = "✔ Critical Lab Value Verified → Dispensing History Unlocked";
 
       unlockModule(
         "mod5",
@@ -181,10 +163,6 @@ document.addEventListener("DOMContentLoaded", function () {
         "[5] Dispensing History"
       );
     }
-
-    // =====================================
-    // FINAL ANSWER
-    // =====================================
 
     else if (code === "MEDICATION INTERACTION") {
       if (
@@ -204,10 +182,6 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
 
-    // =====================================
-    // INVALID
-    // =====================================
-
     else {
       response.innerHTML = "✖ INVALID OR ALREADY USED CODE";
     }
@@ -217,50 +191,31 @@ document.addEventListener("DOMContentLoaded", function () {
   };
 
   updateProgress();
-
 });
 
 function blockAccess(unlockTime) {
-
   function render() {
-
-    const remaining =
-      unlockTime - Date.now();
+    const remaining = unlockTime - Date.now();
 
     if (remaining <= 0) {
-
       location.reload();
-
       return;
-
     }
 
-    const h =
-      Math.floor(remaining / 3600000);
-
-    const m =
-      Math.floor((remaining % 3600000) / 60000);
-
-    const s =
-      Math.floor((remaining % 60000) / 1000);
+    const h = Math.floor(remaining / 3600000);
+    const m = Math.floor((remaining % 3600000) / 60000);
+    const s = Math.floor((remaining % 60000) / 1000);
 
     document.body.innerHTML = `
       <div class="terminal">
-
         <h1>ACCESS RESTRICTED</h1>
-
         <p>> Next phase unavailable.</p>
-
         <p>> Unlock in:</p>
-
         <h2>${h}h ${m}m ${s}s</h2>
-
       </div>
     `;
   }
 
   render();
-
   setInterval(render, 1000);
-
 }
