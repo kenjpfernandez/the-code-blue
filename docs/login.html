@@ -1,12 +1,44 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Code Blue — Secure Login</title>
   <link rel="stylesheet" href="styles.css">
+  <style>
+    #bgVideo {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -2;
+      opacity: 0.16;
+      pointer-events: none;
+    }
+
+    .bg-overlay {
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at top, rgba(102, 221, 198, 0.08), transparent 35%),
+        linear-gradient(180deg, rgba(6, 16, 20, 0.85), rgba(6, 16, 20, 0.94));
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .terminal {
+      position: relative;
+      z-index: 1;
+    }
+  </style>
 </head>
 <body>
+
+<video autoplay muted loop playsinline id="bgVideo">
+  <source src="assets/intro.mp4" type="video/mp4">
+</video>
+
+<div class="bg-overlay"></div>
 
 <div class="terminal">
 
@@ -30,7 +62,7 @@
   <input type="text" id="username" placeholder="Username">
   <input type="password" id="password" placeholder="Password">
 
-<button type="button" onclick="login()">LOGIN</button>
+  <button id="loginBtn" type="button" onclick="login()">LOGIN</button>
 
   <p id="loginResponse"></p>
 
@@ -38,197 +70,143 @@
 
   <div id="inputSection" style="display:none;">
 
-<hr>
+    <hr>
 
-<div class="summary-box">
+    <div class="summary-box">
 
-  <p>
-    Morning of May 24, 2024, a patient in ROOM 314 suffers a sudden deterioration and a CODE BLUE is activated.
-  </p>
+      <p>
+        Morning of May 24, 2024, a patient in ROOM 314 suffers a sudden deterioration and a CODE BLUE is activated.
+      </p>
 
-  <p>The patient survives.</p>
+      <p>The patient survives.</p>
 
-  <p>Hospital leadership launches an INTERNAL REVIEW.</p>
+      <p>Hospital leadership launches an INTERNAL REVIEW.</p>
 
-  <p>
-    Your team has been appointed as the Rapid Incident Review Committee.
-  </p>
+      <p>
+        Your team has been appointed as the Rapid Incident Review Committee.
+      </p>
 
-  <br>
+      <br>
 
-  <p><strong>Your Mission:</strong></p>
+      <p><strong>Your Mission:</strong></p>
 
-  <p>Day 1: Determine what happened.</p>
+      <p>Day 1: Determine what happened.</p>
 
-  <p>Day 2: Determine what caused it.</p>
+      <p>Day 2: Determine what caused it.</p>
 
-  <p>Day 3: Determine what contributed to the event.</p>
+      <p>Day 3: Determine what contributed to the event.</p>
 
-</div>
+    </div>
 
-<hr>
+    <hr>
 
-<p>> Mission Briefing Complete.</p>
+    <p>> Mission Briefing Complete.</p>
 
-<button type="button" onclick="beginReview()">
-  BEGIN REVIEW
-</button>
+    <button type="button" onclick="beginReview()">
+      BEGIN REVIEW
+    </button>
 
   </div>
 
 </div>
 
 <script>
+  // ==========================
+  // TEAM DISPLAY
+  // ==========================
 
-// ==========================
-// TEAM DISPLAY
-// ==========================
+  const team = localStorage.getItem("teamName") || "UNKNOWN";
+  document.getElementById("teamDisplay").innerHTML = `> Team: ${team}`;
 
-const team = localStorage.getItem("teamName") || "UNKNOWN";
+  // ==========================
+  // OPTIONAL SOUND SUPPORT
+  // ==========================
 
-document.getElementById("teamDisplay").innerHTML =
-  `> Team: ${team}`;
+  const sounds = {
+    login: new Audio("assets/login_beep.mp3")
+  };
 
+  sounds.login.volume = 0.5;
 
-// ==========================
-// OPTIONAL SOUND SUPPORT
-// ==========================
+  function playSound(sound) {
+    if (!sound) return;
+    try {
+      sound.currentTime = 0;
+      sound.play().catch(() => {});
+    } catch (err) {
+      console.log("Audio playback blocked or unavailable:", err);
+    }
+  }
 
-const sounds = {
-  login: new Audio("assets/login_beep.mp3")
-};
+  // ==========================
+  // LOGIN
+  // ==========================
 
-sounds.login.volume = 0.5;
+  function login() {
+    const user = document.getElementById("username").value.trim().toLowerCase();
+    const pass = document.getElementById("password").value.trim().toLowerCase();
+    const response = document.getElementById("loginResponse");
 
+    // Username: CB-314
+    // Password: MORNING
 
-// ==========================
-// LOGIN
-// ==========================
+    if (user === "cb-314" && pass === "morning") {
+      document.getElementById("username").style.display = "none";
+      document.getElementById("password").style.display = "none";
+      document.getElementById("loginBtn").style.display = "none";
 
-function login() {
+      playSound(sounds.login);
 
-  const user =
-    document.getElementById("username")
-      .value
-      .trim()
-      .toLowerCase();
+      response.innerHTML = "> ACCESS GRANTED...";
 
-  const pass =
-    document.getElementById("password")
-      .value
-      .trim()
-      .toLowerCase();
+      const bootLines = [
+        "> Connecting to Hospital Incident System...",
+        "> Loading Patient Safety Review Module...",
+        "> Case ID Loaded: CB-314",
+        "> Critical Event Time Pending Verification...",
+        "> Room Assignment Pending Verification...",
+        "> Preparing Secure Access...",
+        "> System Ready."
+      ];
 
-  const response =
-    document.getElementById("loginResponse");
+      let i = 0;
+      const bootDiv = document.getElementById("boot");
 
-  // Username: CB-314
-  // Password: MORNING
+      function typeLine() {
+        if (i < bootLines.length) {
+          const p = document.createElement("p");
+          bootDiv.appendChild(p);
 
-  if (user === "cb-314" && pass === "morning") {
+          let text = bootLines[i];
+          let j = 0;
 
-    document.getElementById("username").style.display = "none";
-
-    document.getElementById("password").style.display = "none";
-
-    document.querySelector(
-      'button[onclick="login()"]'
-    ).style.display = "none";
-
-    // Safe sound playback
-    sounds.login.currentTime = 0;
-
-    sounds.login.play().catch(() => {});
-
-    response.innerHTML = "> ACCESS GRANTED...";
-
-    const bootLines = [
-
-      "> Connecting to Hospital Incident System...",
-
-      "> Loading Patient Safety Review Module...",
-
-      "> Case ID Loaded: CB-314",
-
-      "> Critical Event Time Pending Verification...",
-
-      "> Room Assignment Pending Verification...",
-
-      "> Preparing Secure Access...",
-
-      "> System Ready."
-
-    ];
-
-    let i = 0;
-
-    const bootDiv =
-      document.getElementById("boot");
-
-    function typeLine() {
-
-      if (i < bootLines.length) {
-
-        const p =
-          document.createElement("p");
-
-        bootDiv.appendChild(p);
-
-        let text = bootLines[i];
-
-        let j = 0;
-
-        const interval =
-          setInterval(() => {
-
-            p.textContent =
-              text.slice(0, j++);
-
+          const interval = setInterval(() => {
+            p.textContent = text.slice(0, j++);
             if (j > text.length) {
-
               clearInterval(interval);
-
               i++;
-
               setTimeout(typeLine, 250);
             }
-
           }, 20);
-
+        } else {
+          document.getElementById("inputSection").style.display = "block";
+        }
       }
 
-      else {
+      setTimeout(typeLine, 800);
 
-        document.getElementById("inputSection")
-          .style.display = "block";
-
-      }
+    } else {
+      response.innerHTML = "> ACCESS DENIED";
     }
-
-    setTimeout(typeLine, 800);
-
   }
 
-  else {
+  // ==========================
+  // BEGIN REVIEW
+  // ==========================
 
-    response.innerHTML =
-      "> ACCESS DENIED";
-
+  function beginReview() {
+    window.location.href = "terminal_day1.html";
   }
-}
-
-
-// ==========================
-// BEGIN REVIEW
-// ==========================
-
-function beginReview() {
-
-  window.location.href =
-    "terminal_day1.html";
-
-}
-
 </script>
 
 </body>
