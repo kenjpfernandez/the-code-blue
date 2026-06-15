@@ -6,7 +6,6 @@
   <link rel="stylesheet" href="../styles.css">
 
   <style>
-
     .glitch {
       animation: glitch 0.2s 3;
     }
@@ -35,9 +34,7 @@
     .next-link:hover {
       text-decoration: underline;
     }
-
   </style>
-
 </head>
 <body>
 
@@ -73,7 +70,6 @@ document.getElementById("teamDisplay").innerHTML =
 // ==========================
 
 const lines = [
-
   "> Code Blue activation time confirmed.",
   "> Timeline reconstruction complete.",
   "> Patient deterioration documented.",
@@ -85,7 +81,6 @@ const lines = [
 
   "> Medication review pending.",
   "> Incident file sealed."
-
 ];
 
 let i = 0;
@@ -94,9 +89,7 @@ const contentDiv =
   document.getElementById("content");
 
 function typeLine() {
-
   if (i < lines.length) {
-
     const p =
       document.createElement("p");
 
@@ -107,30 +100,19 @@ function typeLine() {
 
     const interval =
       setInterval(() => {
-
         p.textContent =
           text.slice(0, j++);
 
         if (j > text.length) {
-
           clearInterval(interval);
-
           i++;
-
           setTimeout(typeLine, 350);
-
         }
-
       }, 20);
 
-  }
-
-  else {
-
+  } else {
     triggerFinal();
-
   }
-
 }
 
 
@@ -139,14 +121,12 @@ function typeLine() {
 // ==========================
 
 function triggerFinal() {
-
   document.body.classList.add("glitch");
 
   const warning =
     document.createElement("p");
 
   warning.className = "warning";
-
   warning.innerHTML =
     "> REVIEW TRANSITIONED TO PHASE 2";
 
@@ -154,13 +134,32 @@ function triggerFinal() {
 
   setTimeout(() => {
 
-    // 🔊 Safe unlock sound
+    // Save completion timestamp only when Day 1 is actually completed
+    if (!localStorage.getItem("day1Timestamp")) {
+      localStorage.setItem(
+        "day1Timestamp",
+        new Date().toLocaleString("en-US", {
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit"
+        })
+      );
+    }
 
+    document.getElementById("timestampDisplay").innerHTML =
+      `> Completion Time: ${localStorage.getItem("day1Timestamp")}`;
+
+    // Save completion flag
+    localStorage.setItem("day1Complete", "true");
+
+    // Safe unlock sound
     const unlockSound =
       new Audio("../assets/unlock.mp3");
 
     unlockSound.volume = 0.6;
-
     unlockSound.play().catch(() => {});
 
     const finalMsg =
@@ -171,15 +170,9 @@ function triggerFinal() {
 
     contentDiv.appendChild(finalMsg);
 
-    localStorage.setItem(
-      "day1Complete",
-      "true"
-    );
-
     setTimeout(showNextPhase, 1500);
 
   }, 1500);
-
 }
 
 
@@ -188,7 +181,6 @@ function triggerFinal() {
 // ==========================
 
 function showNextPhase() {
-
   const container =
     document.getElementById("nextPhase");
 
@@ -222,7 +214,6 @@ function showNextPhase() {
     document.createElement("br")
   );
   container.appendChild(link);
-
 }
 
 
@@ -231,9 +222,7 @@ function showNextPhase() {
 // ==========================
 
 window.onload = () => {
-
   setTimeout(typeLine, 700);
-
 };
 
 </script>
