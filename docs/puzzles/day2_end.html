@@ -41,6 +41,7 @@
 
   <h1>ROOT CAUSE REVIEW</h1>
   <p id="teamDisplay"></p>
+  <p id="timestampDisplay"></p>
   <p>> Processing medication review...</p>
 
   <div id="content"></div>
@@ -99,6 +100,26 @@ function triggerFinal() {
   contentDiv.appendChild(warning);
 
   setTimeout(() => {
+    // Save completion timestamp only when Day 2 is actually completed
+    if (!localStorage.getItem("day2Timestamp")) {
+      localStorage.setItem(
+        "day2Timestamp",
+        new Date().toLocaleString("en-US", {
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit"
+        })
+      );
+    }
+
+    document.getElementById("timestampDisplay").innerHTML =
+      `> Completion Time: ${localStorage.getItem("day2Timestamp")}`;
+
+    localStorage.setItem("day2Complete", "true");
+
     const warningSound = new Audio("../assets/warning.mp3");
     warningSound.volume = 0.6;
     warningSound.play().catch(() => {});
@@ -106,8 +127,6 @@ function triggerFinal() {
     const finalMsg = document.createElement("p");
     finalMsg.innerHTML = "<br>> You were not supposed to close the file this early.";
     contentDiv.appendChild(finalMsg);
-
-    localStorage.setItem("day2Complete", "true");
 
     setTimeout(showNextPhase, 1500);
   }, 1500);
