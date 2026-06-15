@@ -18,6 +18,7 @@
   <h1>ROOT CAUSE ANALYSIS COMPLETE</h1>
 
   <p id="teamDisplay"></p>
+  <p id="timestampDisplay"></p>
 
   <p>> Final review processing...</p>
 
@@ -115,6 +116,23 @@ function triggerFinal() {
   contentDiv.appendChild(report);
 
   setTimeout(() => {
+    if (!localStorage.getItem("day3Timestamp")) {
+      localStorage.setItem(
+        "day3Timestamp",
+        new Date().toLocaleString("en-US", {
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit"
+        })
+      );
+    }
+
+    document.getElementById("timestampDisplay").innerHTML =
+      `> Completion Time: ${localStorage.getItem("day3Timestamp")}`;
+
     const archiveSound = new Audio("../assets/archive.mp3");
     archiveSound.volume = 0.6;
     archiveSound.play().catch(() => {});
