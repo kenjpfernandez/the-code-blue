@@ -101,10 +101,30 @@
     <hr>
 
     <p>> Mission Briefing Complete.</p>
+    <p>> Select Review Module:</p>
 
-    <button type="button" onclick="beginReview()">
-      BEGIN REVIEW
-    </button>
+    <div class="summary-box">
+
+      <p><strong>[ CB-314-01 ]</strong> Timeline Review</p>
+      <p>
+        <a href="terminal_day1.html">OPEN FILE</a>
+      </p>
+
+      <hr>
+
+      <p><strong>[ CB-314-02 ]</strong> Medication Safety Review</p>
+      <p>
+        <a href="terminal_day2.html">OPEN FILE</a>
+      </p>
+
+      <hr>
+
+      <p><strong>[ CB-314-03 ]</strong> Root Cause Analysis</p>
+      <p>
+        <a href="terminal_day3.html">OPEN FILE</a>
+      </p>
+
+    </div>
 
   </div>
 
@@ -198,14 +218,6 @@
     } else {
       response.innerHTML = "> ACCESS DENIED";
     }
-  }
-
-  // ==========================
-  // BEGIN REVIEW
-  // ==========================
-
-  function beginReview() {
-    window.location.href = "terminal_day1.html";
   }
 </script>
 
