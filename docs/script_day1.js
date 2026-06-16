@@ -114,17 +114,17 @@ document.addEventListener("DOMContentLoaded", function () {
       playSound(sounds.unlock);
 
       response.innerHTML =
-        "✔ Admission Time Verified → Nursing Notes Unlocked";
+        "✔ Admission Time Verified → Symptom Notes Unlocked";
 
       unlockModule(
         "mod2",
         "https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgBu1ogMrJH9QozJe4ZRav0fAdgMtM3IZJ462VRLyzbrrHI?e=XqOQvt",
-        "[2] Nursing Notes"
+        "[2] Symptom Notes"
       );
     }
 
     // =====================================
-    // NURSING NOTES
+    // SYMPTOM NOTES
     // =====================================
 
     else if (code === "WEAKNESS" && !progress.code2) {
